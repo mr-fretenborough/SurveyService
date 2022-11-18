@@ -1,0 +1,21 @@
++---------------------------------------------------------------------------+
+|                                                                           |
+|                           App Functionality                               |
+|                                                                           |
++---------------------------------------------------------------------------+
+
+Login/Registration
+    1. user chooses to login or register
+    2. user provides email and password
+        a. if registration, send email to verify validity
+        b. add user information to database
+
+Landing Page
+    1. user given three options:
+        a. survey participation
+        b. survey creation
+        c. survey results
+            * each option will redirect to another page
+
+Participation Page
+    1. 
