@@ -19,3 +19,63 @@ Landing Page
 
 Participation Page
     1. 
+
+Creation Page
+    1. 
+
+Results Page
+    1. 
+
+
++---------------------------------------------------------------------------+
+|                                                                           |
+|                             Project Design                                |
+|                                                                           |
++---------------------------------------------------------------------------+
+
+Front-End Technology:
+    1. React
+    2. Express
+    3. Node
+
+Back-End Technology:
+    1. MySQL: Database Manager
+    2. Sequelize: Object-Relational Mapper
+    3. NodeEmail: Email Verification
+
+Other Technology:
+    1. GitHub: Source Code Control
+
+
+
+
+
+
+
+
++---------------------------------------------------------------------------+
+|                                                                           |
+|                                 Notes                                     |
+|                                                                           |
++---------------------------------------------------------------------------+
+
+Sequelize Setup: https://sequelize.org/
+    1. cd into project directory and run
+        npm install --save sequelize
+    2. run (for MySQL)
+        npm install --save mysql2
+    3. connect to db by creating sequelize instance
+        const { Sequelize } = require('sequelize');
+        const sequelize = new Sequelize('database', 'username', 'password', {
+            host: 'localhost',
+            dialect: 'mysql'
+        });
+    4. test connection via `.authenticate()`
+        try {
+            await sequelize.authenticate();
+            console.log('Connection has been established successfully.');
+        } catch (error) {
+            console.error('Unable to connect to the database:', error);
+        }
+    5. close the connection
+        sequelize.close()
