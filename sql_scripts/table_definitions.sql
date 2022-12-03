@@ -53,4 +53,14 @@ select *
 
 /* Get All Survey Responses */
 select *
-  from 
+  from Surveys s
+  join Questions q
+    on s.SurveyID = q.SurveyID
+  join Responses r
+    on q.QuestionID = r.QuestionID
+
+
+
+
+
+*S3cretP4ssword!*
