@@ -44,10 +44,9 @@ app.post('/authenticate_user', (req, res) => {
             res.send(out[0][0]);
             exists = 1;
             console.log("user found");
-            return;
-        };
+        }
     });
-
+    console.log(exists);
     if (!exists) {
         const make_new = `
             insert into Users (Email, Password, Verified) values ("${email}", "${password}", default);
