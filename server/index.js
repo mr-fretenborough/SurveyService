@@ -56,9 +56,10 @@ app.post('/create_survey', (req, res) => {
             console.log(err);
         }
         console.log(out);
+        res.send("inside");
     });
     // return response to caller
-    res.send("it workkkdddkdkd");
+    // res.send("outside");
 });
 
 app.listen(PORT, ()=>{
