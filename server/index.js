@@ -32,7 +32,7 @@ app.post('/authenticate_user', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     const query = `
-        select * from Users where Email = ${email} and Password = ${password};
+        select * from Users where Email = "${email}" and Password = "${password}";
     `;
     // execute sql
     db.query(query, (err, out) => {
