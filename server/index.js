@@ -7,7 +7,7 @@ const PORT = 3002;
 app.use(cors());
 app.use(express.json())
 
-app.get("/", (req, res) => {
+app.get("/test", (req, res) => {
     res.json("sup jit");
 })
 
