@@ -40,7 +40,7 @@ app.post('/authenticate_user', (req, res) => {
         if (err) {
             console.log(err);
         }
-        if (out) {
+        if (typeof out != "undefined") {
             res.send(out[0][0]);
             exists = 1;
             console.log("user found");
@@ -61,7 +61,7 @@ app.post('/authenticate_user', (req, res) => {
             if (err) {
                 console.log(err);
             }
-            if (out) {
+            if (typeof out != "undefined") {
                 res.send(out[0][0]);
                 exists = 1;
                 console.log("user created");
@@ -69,23 +69,6 @@ app.post('/authenticate_user', (req, res) => {
             };
         });
     }
-});
-/************************** Create User **************************/
-app.post('/create_user', (req, res) => {
-    // format new user data & build query
-    const email = req.body.email;
-    const password = req.body.password;
-    const query = `
-        insert into Users (Email, Password, Verified) values ("${email}", "${password}", default);
-    `;
-    // execute sql
-    db.query(query, (err, out) => {
-        if (err) {
-            console.log(err);
-        }
-        console.log("user created");
-        res.send(out);
-    });
 });
 /************************** Get User **************************/        
 app.get('/get_user', (req, res) => {
