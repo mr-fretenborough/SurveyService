@@ -98,3 +98,8 @@ How I got Apache2 to show my shit lmao:
     sudo a2ensite survey.conf           | activate survey.conf
     sudo a2dissite 000-default.conf     | deactivate default config
     systemctl reload apache2            | reload apache
+
+Connecting to Database:
+    cd                                  | nav to root directory
+    mysql -u root -p                    | uses the root username
+                                        | then you enter your password
