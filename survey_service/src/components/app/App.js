@@ -9,9 +9,10 @@ import Viewing from '../viewing/Viewing';
 function App() {
   const [view, setView] = useState(3);
 
-  const createUser = () => {
-    Axios.post("http://18.207.227.234:3002/testing_api", {
-      val: view
+  const createUser = (email, password) => {
+    Axios.post("http://18.207.227.234:3002/create_user", {
+      email: email,
+      password: password
     }).then(() => {
       alert("this is an alert, ew")
     });
@@ -22,7 +23,7 @@ function App() {
       {
         view != 0 &&
         <h1 className="header">
-          <button className="button" onClick={createUser}>Survey Creation</button>
+          <button className="button" onClick={() => createUser('emailllllll', 'passsssss')}>Survey Creation</button>
           <button className="button" onClick={() => setView(2)}>Survey Participation</button>
           <button className="button" onClick={() => setView(3)}>Survey Results</button>
         </h1>

@@ -25,14 +25,22 @@ app.post('/testing_api', (req, res) => {
     res.send(req);
 });
 
-app.get('/create_user', (req, res) => {
-    console.log("STATUS: Creating user {}");
-    db.query("insert into test (testing) values (1);", (err, out) => {
+app.post('/create_user', (req, res) => {
+    // format new user data & build query
+    const email = req.body.email;
+    const password = req.body.email;
+    const query = `
+        insert into Users (Email, Password, Verified) values (${email}, ${password}, default);
+    `;
+    // execute sql
+    db.query(query, (err, out) => {
         if (err) {
             console.log(err);
         }
         console.log(out);
     });
+    // return response to caller
+    res.send(req);
 });
 
 app.listen(PORT, ()=>{
