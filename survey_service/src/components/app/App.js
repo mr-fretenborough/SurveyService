@@ -7,15 +7,12 @@ import Participation from '../participation/Participation';
 import Viewing from '../viewing/Viewing';
 
 function App() {
-  const [view, setView] = useState(3);
+  const [view, setView] = useState(0);
+  const [userid, setUserID] = useState();
 
-  const createUser = (email, password) => {
-    Axios.post("http://18.207.227.234:3002/create_user", {
-      email: email,
-      password: password
-    }).then(() => {
-      alert("this is an alert, ew")
-    });
+  const isReal = (uid) => {
+    setUserID(uid);
+    setView(5); // 5 is an arbitrary number
   }
 
   return (
@@ -23,12 +20,12 @@ function App() {
       {
         view != 0 &&
         <h1 className="header">
-          <button className="button" onClick={() => createUser("\"emailllllll\"", "\"passsssss\"")}>Survey Creation</button>
+          <button className="button" onClick={() => setView(1)}>Survey Creation</button>
           <button className="button" onClick={() => setView(2)}>Survey Participation</button>
           <button className="button" onClick={() => setView(3)}>Survey Results</button>
         </h1>
       }
-      {view === 0 && <Login/>}
+      {view === 0 && <Login isReal={isReal}/>}
       {view === 1 && <Creation/>}
       {view === 2 && <Participation/>}
       {view === 3 && <Viewing/>}

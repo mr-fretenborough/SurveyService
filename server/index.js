@@ -9,6 +9,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+/************************** Testing **************************/
 app.post('/testing_api', (req, res) => {
     const val = req.body.val;
     const query = `
@@ -24,7 +25,23 @@ app.post('/testing_api', (req, res) => {
     });
     res.send(req);
 });
-
+/************************** Authenticate User **************************/
+app.post('/authenticate_user', (req, res) => {
+    // format new user data & build query
+    const email = req.body.email;
+    const password = req.body.password;
+    const query = `
+        select * from Users where Email = ${email} and Password = ${password};
+    `;
+    // execute sql
+    db.query(query, (err, out) => {
+        if (err) {
+            console.log(err);
+        }
+        res.send(out);
+    });
+});
+/************************** Create User **************************/
 app.post('/create_user', (req, res) => {
     // format new user data & build query
     const email = req.body.email;
@@ -40,10 +57,24 @@ app.post('/create_user', (req, res) => {
         console.log(out);
         res.send("inside");
     });
-    // return response to caller
-    // res.send("outside");
 });
-
+/************************** Get User **************************/
+app.get('/get_user', (req, res) => {
+    // format new user data & build query
+    const email = req.body.user_id;
+    const query = `
+        select UserID from Users where UserID = ${user_id};
+    `;
+    // execute sql
+    db.query(query, (err, out) => {
+        if (err) {
+            console.log(err);
+        }
+        console.log(out);
+        res.send("inside");
+    });
+});
+/************************** Create Survey **************************/
 app.post('/create_survey', (req, res) => {
     // format new user data & build query
     const email = req.body.email;
@@ -59,10 +90,8 @@ app.post('/create_survey', (req, res) => {
         console.log(out);
         res.send("inside");
     });
-    // return response to caller
-    // res.send("outside");
 });
-
-app.listen(PORT, ()=>{
+/************************** Port Listener **************************/
+app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`)
-})
+});
