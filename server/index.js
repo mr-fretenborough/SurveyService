@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.get('/testing_api', (req, res) => {
     const query = `
-        insert into test (testing) values (${req.body.val});
+        insert into test (testing) values (${req.params.val});
     `;
 
     db.query(query, (err, out) => {
