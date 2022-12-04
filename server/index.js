@@ -18,7 +18,7 @@ app.get('/testing_api', (req, res) => {
         }
         console.log(out);
     });
-    res.send(req.body);
+    res.send(req);
 });
 
 app.get('/create_user', (req, res) => {
