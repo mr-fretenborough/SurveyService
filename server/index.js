@@ -56,11 +56,11 @@ app.post('/create_user', (req, res) => {
         if (err) {
             console.log(err);
         }
-        console.log("user created")
+        console.log("user created");
         res.send(out);
     });
 });
-/************************** Get User **************************/
+/************************** Get User **************************/        
 app.get('/get_user', (req, res) => {
     // format new user data & build query
     const email = req.body.user_id;
