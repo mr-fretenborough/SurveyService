@@ -5,9 +5,9 @@ const cors = require('cors')
 const app = express();
 const PORT = 3002;
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
 
-app.post('/testing_api', (req, res) => {
+app.get('/testing_api', (req, res) => {
     console.log("here we are");
     db.query("insert into test (testing) values 1;", (err, out) => {
         if (err) {
