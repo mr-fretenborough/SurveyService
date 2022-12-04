@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       {
-        view != 4 &&
+        view != 0 &&
         <h1 className="header">
           <button className="button" onClick={() => setView(1)}>Survey Creation</button>
           <button className="button" onClick={() => setView(2)}>Survey Participation</button>
