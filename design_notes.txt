@@ -103,3 +103,10 @@ Connecting to Database:
     cd                                  | nav to root directory
     mysql -u root -p                    | uses the root username
                                         | then you enter your password
+
+
+git add .
+
+git commit -m "your message"
+
+git push
