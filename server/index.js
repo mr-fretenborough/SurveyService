@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.get('/testing_api', (req, res) => {
     console.log("here we are");
-    db.query("insert into test (testing) values 1;", (err, out) => {
+    db.query("insert into test (testing) values (1);", (err, out) => {
         if (err) {
             console.log(err);
         }
