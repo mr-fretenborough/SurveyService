@@ -28,7 +28,7 @@ app.post('/testing_api', (req, res) => {
 app.post('/create_user', (req, res) => {
     // format new user data & build query
     const email = req.body.email;
-    const password = req.body.email;
+    const password = req.body.password;
     const query = `
         insert into Users (Email, Password, Verified) values (${email}, ${password}, default);
     `;
@@ -41,6 +41,24 @@ app.post('/create_user', (req, res) => {
     });
     // return response to caller
     res.send(req);
+});
+
+app.post('/create_survey', (req, res) => {
+    // format new user data & build query
+    const email = req.body.email;
+    const password = req.body.password;
+    const query = `
+        insert into Users (Email, Password, Verified) values (${email}, ${password}, default);
+    `;
+    // execute sql
+    db.query(query, (err, out) => {
+        if (err) {
+            console.log(err);
+        }
+        console.log(out);
+    });
+    // return response to caller
+    res.send("it workkkdddkdkd");
 });
 
 app.listen(PORT, ()=>{

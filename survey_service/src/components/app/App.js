@@ -23,7 +23,7 @@ function App() {
       {
         view != 0 &&
         <h1 className="header">
-          <button className="button" onClick={() => createUser('emailllllll', 'passsssss')}>Survey Creation</button>
+          <button className="button" onClick={() => createUser("\"emailllllll\"", "\"passsssss\"")}>Survey Creation</button>
           <button className="button" onClick={() => setView(2)}>Survey Participation</button>
           <button className="button" onClick={() => setView(3)}>Survey Results</button>
         </h1>
