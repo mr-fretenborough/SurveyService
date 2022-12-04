@@ -22,8 +22,8 @@ function Login({ isReal }) {
             email: email,
             password: password
           }).then((response) => {
-            console.log(response);
-            if (!response.data) {
+            console.log(response.data);
+            if (!response.data.length) {
                 createUser();
             }
             // isReal(response.user_id);
@@ -36,8 +36,6 @@ function Login({ isReal }) {
         Axios.post("http://18.207.227.234:3002/create_user", {
             email: email,
             password: password
-        }).then(() => {
-            var a = 1; // idfk lmao
         });
     }
 
