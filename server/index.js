@@ -13,7 +13,7 @@ app.get('/testing_api', (req, res) => {
     const query = `
         insert into test (testing) values (${req.body.val});
     `;
-
+    console.log(req.body.val);
     db.query(query, (err, out) => {
         if (err) {
             console.log(err);
