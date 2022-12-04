@@ -39,7 +39,7 @@ app.get('/authenticate_user', (req, res) => {
             console.log(err);
             res.send(err);
         }
-        res.send(out);
+        // res.send(out);
     });
 });
 /************************** Create User **************************/
