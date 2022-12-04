@@ -26,7 +26,7 @@ app.post('/testing_api', (req, res) => {
     res.send(req);
 });
 /************************** Authenticate User **************************/
-app.post('/authenticate_user', (req, res) => {
+app.get('/authenticate_user', (req, res) => {
     // format new user data & build query
     const email = req.body.email;
     const password = req.body.password;
