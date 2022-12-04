@@ -1,11 +1,30 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
-import Creation from '../creation/Creation'
+// import mysql from 'mysql';
+import Login from '../login/Login';
+import Creation from '../creation/Creation';
+import Participation from '../participation/Participation';
+import Viewing from '../viewing/Viewing';
+
+// const mysql = require('mysql');
 
 function App() {
+  const [view, setView] = useState(0);
+
   return (
     <div className="App">
-      <Creation/>
+      {
+        view != 4 &&
+        <h1 className="header">
+          <button className="button" onClick={() => setView(1)}>Survey Creation</button>
+          <button className="button" onClick={() => setView(2)}>Survey Participation</button>
+          <button className="button" onClick={() => setView(3)}>Survey Results</button>
+        </h1>
+      }
+      {view === 0 && <Login/>}
+      {view === 1 && <Creation/>}
+      {view === 2 && <Participation/>}
+      {view === 3 && <Viewing/>}
     </div>
   );
 }
