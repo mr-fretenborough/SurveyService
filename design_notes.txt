@@ -79,3 +79,22 @@ Sequelize Setup: https://sequelize.org/
         }
     5. close the connection
         sequelize.close()
+
+Working Directory: /home/ubuntu/SurveyService/
+Steps for Production:
+    1. SSH into EC2 instance. `ssh -i fdjksafld;jasfdskalf`
+    2. Navigate to working directory.`cd /home/ubuntu/SurveyService/`
+    3. Update repository. `git pull`
+    4. Navigate to "survey_service" folder. `cd survey_service`
+    5. Create build. `npm run build`
+    6. The changes should show on the server.
+
+How I got Apache2 to show my shit lmao:
+    cd /                                | navigate to root
+    cd /etc/apache2/sites-available     | 
+    sudo cp 000-default.conf            | copy default config file
+    sudo nano survey.conf               | change documentroot to /home/ubuntu/SurveyService/
+    sudo nano ../apache2.conf           | add a documentroot to /home/ubuntu/SurveyService/
+    sudo a2ensite survey.conf           | activate survey.conf
+    sudo a2dissite 000-default.conf     | deactivate default config
+    systemctl reload apache2            | reload apache
