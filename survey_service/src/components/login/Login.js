@@ -23,7 +23,7 @@ function Login({ isReal }) {
             password: password
           }).then((response) => {
             console.log(response);
-            if (!response) {
+            if (!response.data) {
                 createUser();
             }
             // isReal(response.user_id);

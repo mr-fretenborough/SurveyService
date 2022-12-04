@@ -40,8 +40,7 @@ app.post('/authenticate_user', (req, res) => {
             console.log(err);
         }
         console.log("user authenticated");
-        console.log(out.data);
-        res.send(out.data);
+        res.send(out);
     });
 });
 /************************** Create User **************************/
@@ -50,7 +49,7 @@ app.post('/create_user', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     const query = `
-        insert into Users (Email, Password, Verified) values (${email}, ${password}, default);
+        insert into Users (Email, Password, Verified) values ("${email}", "${password}", default);
     `;
     // execute sql
     db.query(query, (err, out) => {
