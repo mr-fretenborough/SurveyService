@@ -31,7 +31,7 @@ app.post('/authenticate_user', (req, res) => {
     // format new user data & build query
     const email = req.body.email;
     const password = req.body.password;
-    var exists = 0;
+    let exists = 0;
     const query = `
         select * from Users where Email = "${email}" and Password = "${password}";
     `;
