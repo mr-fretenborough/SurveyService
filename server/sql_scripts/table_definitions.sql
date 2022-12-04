@@ -63,4 +63,4 @@ select *
 
 
 
-*S3cretP4ssword!* *Ubun7u!* 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
+*S3cretP4ssword!* *Ubun7u!* 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
