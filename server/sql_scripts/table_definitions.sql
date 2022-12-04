@@ -1,28 +1,28 @@
 create table Users (
-                      UserID      int primary key
+                      UserID      int primary key auto_increment
                     , Email       nvarchar(255) not null
                     , Password    nvarchar(255) not null
                    )
 ;
 
-create table Surveys (
-                        SurveyID    int primary key
-                      , UserID      int not null
-                     )
+create table Participates (
+                             UserID    int primary key
+                           , SurveyID  int not null
+                          )
 ;
 
 create table Surveys (
-                        SurveyID    int primary key
+                        SurveyID    int primary key auto_increment
                       , UserID      int not null
                       , Title       nvarchar(255) not null
                       , Description nvarchar(255) not null
-                      , StartDate   date?? not null
-                      , EndDate     date?? not null
+                      , StartDate   date not null
+                      , EndDate     date not null
                      )
 ;
 
 create table Questions (
-                        QuestionID      int primary key
+                        QuestionID      int primary key auto_increment
                       , SurveyID        int not null
                       , QuestionType    boolean not null
                       , Question        nvarchar(255) not null

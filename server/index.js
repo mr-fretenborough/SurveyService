@@ -9,6 +9,17 @@ app.use(express.json());
 
 app.get('/testing_api', (req, res) => {
     console.log("here we are");
+    db.query('insert into test (testing) values (?);', req.body.val, (err, out) => {
+        if (err) {
+            console.log(err);
+        }
+        console.log(out);
+    });
+    res.send("it worked i think");
+});
+
+app.get('/create_user', (req, res) => {
+    console.log("STATUS: Creating user {}");
     db.query("insert into test (testing) values (1);", (err, out) => {
         if (err) {
             console.log(err);
