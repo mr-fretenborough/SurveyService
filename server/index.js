@@ -1,15 +1,17 @@
 const express = require('express');
-const db = require('./config/db')
-const cors = require('cors')
+const bodyParser = require('body-parser');
+const db = require('./config/db');
+const cors = require('cors');
 
 const app = express();
 const PORT = 3002;
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/testing_api', (req, res) => {
     const query = `
-        insert into test (testing) values (${req.params.val});
+        insert into test (testing) values (${req.body.val});
     `;
 
     db.query(query, (err, out) => {
