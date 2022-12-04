@@ -8,15 +8,14 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/testing_api', (req, res) => {
-    console.log("here we are");
     const test = req.body.val;
-    db.query('insert into test (testing) values (?);', test, (err, out) => {
+    db.query('insert into test (testing) values (?)', test, (err, out) => {
         if (err) {
             console.log(err);
         }
         console.log(out);
     });
-    res.send(test);
+    res.send(json.stringify(req));
 });
 
 app.get('/create_user', (req, res) => {
