@@ -31,6 +31,7 @@ app.post('/authenticate_user', (req, res) => {
     // format new user data & build query
     const email = req.body.email;
     const password = req.body.password;
+    const exists = 0;
     const query = `
         select * from Users where Email = "${email}" and Password = "${password}";
     `;
@@ -39,9 +40,35 @@ app.post('/authenticate_user', (req, res) => {
         if (err) {
             console.log(err);
         }
-        console.log(out);
-        res.send(out);
+        if (out) {
+            res.send(out[0].UserID);
+            exists = 1;
+            console.log("user found");
+            return;
+        };
     });
+
+    if (!exists) {
+        const make_new = `
+            insert into Users (Email, Password, Verified) values ("${email}", "${password}", default);
+        `;
+        db.query(make_new, (err, out) => {
+            if (err) {
+                console.log(err);
+            }
+        });
+        db.query(query, (err, out) => {
+            if (err) {
+                console.log(err);
+            }
+            if (out) {
+                res.send(out[0].UserID);
+                exists = 1;
+                console.log("user created");
+                return;
+            };
+        });
+    }
 });
 /************************** Create User **************************/
 app.post('/create_user', (req, res) => {
