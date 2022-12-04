@@ -1,9 +1,10 @@
-
+import { useState } from 'react';
 
 function Viewing() {
+
     return (
         <div>
-            viewing section
+          this is ker 
         </div>
     )
 }
