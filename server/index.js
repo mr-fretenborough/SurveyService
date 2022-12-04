@@ -7,6 +7,10 @@ const PORT = 3002;
 app.use(cors());
 app.use(express.json())
 
+app.get("/", (req, res) => {
+    res.json("sup jit");
+})
+
 // Route to get all posts
 app.get("/api/get", (req,res)=>{
 db.query("SELECT * FROM posts", (err,result)=>{
