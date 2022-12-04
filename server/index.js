@@ -7,8 +7,8 @@ const PORT = 3002;
 const app = express();
 app.use(cors());
 app.use(express.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
 
 /************************** Testing **************************/
 app.post('/testing_api', (req, res) => {
@@ -27,7 +27,7 @@ app.post('/testing_api', (req, res) => {
     res.send(req);
 });
 /************************** Authenticate User **************************/
-app.get('/authenticate_user', (req, res) => {
+app.post('/authenticate_user', (req, res) => {
     // format new user data & build query
     const email = req.body.email;
     const password = req.body.password;
@@ -39,9 +39,8 @@ app.get('/authenticate_user', (req, res) => {
         if (err) {
             console.log(err);
             console.log("i am here serv ind 40");
-            res.send(err);
         }
-        // res.send(out);
+        res.send(out);
     });
 });
 /************************** Create User **************************/

@@ -18,10 +18,11 @@ function Login({ isReal }) {
     const authenticateUser = () => {
         if (!email || !password) return false;
 
-        Axios.get("http://18.207.227.234:3002/authenticate_user", {
+        Axios.post("http://18.207.227.234:3002/authenticate_user", {
             email: email,
             password: password
           }).then((response) => {
+            console.log(response);
             // if (0) {
             //     isReal(getUser(createUser()));
             //     return;
