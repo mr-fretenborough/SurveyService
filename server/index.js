@@ -39,7 +39,7 @@ app.post('/authenticate_user', (req, res) => {
         if (err) {
             console.log(err);
         }
-        console.log("Success");
+        console.log("user authenticated");
         res.send(out.data);
     });
 });
@@ -56,6 +56,7 @@ app.post('/create_user', (req, res) => {
         if (err) {
             console.log(err);
         }
+        console.log("user created")
         res.send(out);
     });
 });
