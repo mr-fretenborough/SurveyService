@@ -38,7 +38,7 @@ app.post('/authenticate_user', (req, res) => {
     db.query(query, (err, out) => {
         if (err) {
             console.log(err);
-            console.log("i am here serv ind 40");
+            console.log("i am heree serv ind 40");
         }
         res.send(out);
     });
