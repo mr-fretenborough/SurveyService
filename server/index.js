@@ -40,6 +40,7 @@ app.post('/authenticate_user', (req, res) => {
             console.log(err);
         }
         console.log("user authenticated");
+        console.log(out.data);
         res.send(out.data);
     });
 });
