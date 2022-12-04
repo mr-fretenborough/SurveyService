@@ -6,21 +6,7 @@ function Login({ isReal }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const authenticateUser = () => {
-        if (!email || !password) return false;
-
-        Axios.get("http://18.207.227.234:3002/authenticate_user", {
-            email: email,
-            password: password
-          }).then((response) => {
-            if (!response.exists) {
-                isReal(getUser(createUser()));
-                return;
-            }
-            isReal(response.user_id);
-          });
-    }
-
+    
     const getUser = () => {
         Axios.get("http://18.207.227.234:3002/get_user", {
             email: email,
@@ -28,6 +14,21 @@ function Login({ isReal }) {
         }).then((response) => {
             return response.user_id
         });
+    }
+    
+    const authenticateUser = () => {
+        if (!email || !password) return false;
+
+        Axios.get("http://18.207.227.234:3002/authenticate_user", {
+            email: email,
+            password: password
+          }).then((response) => {
+            // if (0) {
+            //     isReal(getUser(createUser()));
+            //     return;
+            // }
+            // isReal(response.user_id);
+          });
     }
 
     const createUser = (email, password) => {

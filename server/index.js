@@ -37,6 +37,7 @@ app.get('/authenticate_user', (req, res) => {
     db.query(query, (err, out) => {
         if (err) {
             console.log(err);
+            res.send(err);
         }
         res.send(out);
     });
