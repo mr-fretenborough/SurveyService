@@ -38,9 +38,10 @@ app.post('/create_user', (req, res) => {
             console.log(err);
         }
         console.log(out);
+        res.send("inside");
     });
     // return response to caller
-    res.send(req);
+    // res.send("outside");
 });
 
 app.post('/create_survey', (req, res) => {
