@@ -26,7 +26,7 @@ app.post('/testing_api', (req, res) => {
     });
     res.send(req);
 });
-/************************** Authenticate User **************************/
+/************************** Initialize User **************************/
 app.post('/authenticate_user', (req, res) => {
     // format new user data & build query
     const email = req.body.email;
@@ -44,6 +44,8 @@ app.post('/authenticate_user', (req, res) => {
         }
         if (out.length) {
             console.log("user found");
+            res.send(out);
+            return;
         } else {
             db.query(make_new, (err, out) => {
                 if (err) {
@@ -51,24 +53,13 @@ app.post('/authenticate_user', (req, res) => {
                 }
             });
             console.log("user created");
+            db.query(get_user, (err, out) => {
+                if (err) {
+                    console.log(err);
+                }
+                res.send(out);
+            });
         }
-        res.send(out);
-    });
-});
-/************************** Get User **************************/        
-app.get('/get_user', (req, res) => {
-    // format new user data & build query
-    const email = req.body.user_id;
-    const query = `
-        select UserID from Users where UserID = ${user_id};
-    `;
-    // execute sql
-    db.query(query, (err, out) => {
-        if (err) {
-            console.log(err);
-        }
-        console.log(out);
-        res.send("inside");
     });
 });
 /************************** Create Survey **************************/

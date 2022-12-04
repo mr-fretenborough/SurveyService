@@ -2,18 +2,9 @@ import { useState } from "react";
 import Axios from 'axios';
 
 
-function Login({ isReal }) {
+function Login({ loggedIn }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const getUser = () => {
-        Axios.get("http://18.207.227.234:3002/get_user", {
-            email: email,
-            password: password
-        }).then((response) => {
-            return response.user_id
-        });
-    }
     
     const authenticateUser = () => {
         if (!email || !password) return false;
@@ -22,16 +13,8 @@ function Login({ isReal }) {
             email: email,
             password: password
           }).then((response) => {
-            console.log(response.data);
-            // isReal(response.user_id);
+            loggedIn(response.data[0].UserID);
           });
-    }
-
-    const createUser = (email, password) => {
-        Axios.post("http://18.207.227.234:3002/create_user", {
-            email: email,
-            password: password
-        });
     }
 
     return (

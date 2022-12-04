@@ -10,7 +10,7 @@ function App() {
   const [view, setView] = useState(0);
   const [userid, setUserID] = useState();
 
-  const isReal = (uid) => {
+  const loggedIn = (uid) => {
     setUserID(uid);
     setView(5); // 5 is an arbitrary number
   }
@@ -25,7 +25,7 @@ function App() {
           <button className="button" onClick={() => setView(3)}>Survey Results</button>
         </h1>
       }
-      {view === 0 && <Login isReal={isReal}/>}
+      {view === 0 && <Login loggedIn={loggedIn}/>}
       {view === 1 && <Creation/>}
       {view === 2 && <Participation/>}
       {view === 3 && <Viewing/>}
