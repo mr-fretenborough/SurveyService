@@ -15,7 +15,7 @@ app.get('/testing_api', (req, res) => {
         }
         console.log(out);
     });
-    res.send("it worked i think");
+    res.send(req.body.val);
 });
 
 app.get('/create_user', (req, res) => {
