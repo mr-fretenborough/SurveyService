@@ -38,9 +38,9 @@ app.post('/authenticate_user', (req, res) => {
     db.query(query, (err, out) => {
         if (err) {
             console.log(err);
-            console.log("i am heree serv ind 40");
         }
-        res.send(out);
+        console.log("Success");
+        res.send(out.data);
     });
 });
 /************************** Create User **************************/
