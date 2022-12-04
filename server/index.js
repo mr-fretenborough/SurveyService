@@ -7,7 +7,8 @@ const PORT = 3002;
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 /************************** Testing **************************/
 app.post('/testing_api', (req, res) => {
@@ -37,6 +38,7 @@ app.get('/authenticate_user', (req, res) => {
     db.query(query, (err, out) => {
         if (err) {
             console.log(err);
+            console.log("i am here serv ind 40");
             res.send(err);
         }
         // res.send(out);
