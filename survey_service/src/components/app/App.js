@@ -1,12 +1,9 @@
 import { useState } from 'react';
 import './App.css';
-// import mysql from 'mysql';
 import Login from '../login/Login';
 import Creation from '../creation/Creation';
 import Participation from '../participation/Participation';
 import Viewing from '../viewing/Viewing';
-
-// const mysql = require('mysql');
 
 function App() {
   const [view, setView] = useState(0);
