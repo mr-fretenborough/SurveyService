@@ -7,7 +7,7 @@ import Participation from '../participation/Participation';
 import Viewing from '../viewing/Viewing';
 
 function App() {
-  const [view, setView] = useState(0);
+  const [view, setView] = useState(3);
 
   const createUser = () => {
     Axios.get("http://18.207.227.234:3002/testing_api", {
