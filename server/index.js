@@ -9,13 +9,14 @@ app.use(express.json());
 
 app.get('/testing_api', (req, res) => {
     console.log("here we are");
-    db.query('insert into test (testing) values (?);', req.body.val, (err, out) => {
+    const test = req.body.val;
+    db.query('insert into test (testing) values (?);', test, (err, out) => {
         if (err) {
             console.log(err);
         }
         console.log(out);
     });
-    res.send(req.body.val);
+    res.send(test);
 });
 
 app.get('/create_user', (req, res) => {
