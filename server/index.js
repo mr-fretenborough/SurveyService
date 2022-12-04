@@ -31,7 +31,6 @@ app.post('/authenticate_user', (req, res) => {
     // format new user data & build query
     const email = req.body.email;
     const password = req.body.password;
-    let exists = 0;
     const get_user = `
         select * from Users where Email = "${email}" and Password = "${password}";
     `;
@@ -39,7 +38,7 @@ app.post('/authenticate_user', (req, res) => {
         insert into Users (Email, Password, Verified) values ("${email}", "${password}", default);
     `;
     // execute sql
-    db.query(query, (err, out) => {
+    db.query(get_user, (err, out) => {
         if (err) {
             console.log(err);
         }
