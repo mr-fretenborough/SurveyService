@@ -39,7 +39,7 @@ app.post('/authenticate_user', (req, res) => {
         if (err) {
             console.log(err);
         }
-        console.log("user authenticated");
+        console.log(out.data);
         res.send(out);
     });
 });
