@@ -40,7 +40,7 @@ app.post('/authenticate_user', (req, res) => {
         if (err) {
             console.log(err);
         }
-        if (typeof out != "undefined") {
+        if (out.length) {
             res.send(out[0][0]);
             exists = 1;
             console.log("user found");
@@ -60,11 +60,10 @@ app.post('/authenticate_user', (req, res) => {
             if (err) {
                 console.log(err);
             }
-            if (typeof out != "undefined") {
+            if (out.length) {
                 res.send(out[0][0]);
                 exists = 1;
                 console.log("user created");
-                return;
             };
         });
     }
