@@ -3,11 +3,11 @@ const bodyParser = require('body-parser');
 const db = require('./config/db');
 const cors = require('cors');
 
-const app = express();
 const PORT = 3002;
+const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/testing_api', (req, res) => {
     const query = `
