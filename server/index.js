@@ -9,11 +9,13 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/testing_api', (req, res) => {
+app.post('/testing_api', (req, res) => {
+    const val = req.body.val;
     const query = `
-        insert into test (testing) values (${req.body.val});
+        insert into test (testing) values (${val});
     `;
     console.log(req.body.val);
+    console.log(val)
     db.query(query, (err, out) => {
         if (err) {
             console.log(err);

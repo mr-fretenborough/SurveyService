@@ -10,7 +10,7 @@ function App() {
   const [view, setView] = useState(3);
 
   const createUser = () => {
-    Axios.get("http://18.207.227.234:3002/testing_api", {
+    Axios.post("http://18.207.227.234:3002/testing_api", {
       val: view
     }).then(() => {
       alert("this is an alert, ew")
