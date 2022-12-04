@@ -23,11 +23,12 @@ function Login({ isReal }) {
             password: password
           }).then((response) => {
             console.log(response);
-            // if (0) {
-            //     isReal(getUser(createUser()));
-            //     return;
-            // }
+            if (!response) {
+                createUser();
+            }
             // isReal(response.user_id);
+          }).then((response) => {
+            console.log(response);
           });
     }
 

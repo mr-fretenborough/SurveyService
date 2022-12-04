@@ -56,8 +56,7 @@ app.post('/create_user', (req, res) => {
         if (err) {
             console.log(err);
         }
-        console.log(out);
-        res.send("inside");
+        res.send(out);
     });
 });
 /************************** Get User **************************/
