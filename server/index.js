@@ -41,7 +41,7 @@ app.post('/authenticate_user', (req, res) => {
             console.log(err);
         }
         if (out) {
-            res.send(out[0].UserID);
+            res.send(out[0][0]);
             exists = 1;
             console.log("user found");
             return;
