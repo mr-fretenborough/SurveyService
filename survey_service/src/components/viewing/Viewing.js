@@ -15,14 +15,20 @@ function Viewing(props) {
     });
   } 
 
+  const getResults = () => {
+    Axios.post(`${props.host}:3002/get_results`, {
+      survey_id: surveyid
+    }).then((response) => {
+      console.log(`Response`)
+    })
+  }
+
   const createSurveyTable = () => {
     if (!surveys.length) getAllSurveys(props.userid);
     return (!surveys ? null : (
       <>
         <tr>
           <td>Selection</td>
-          <td>Survey ID</td>
-          <td>User ID</td>
           <td>Title</td>
           <td>Description</td>
           <td>Start Date</td>
@@ -35,7 +41,7 @@ function Viewing(props) {
                 <button onClick={() => {setSurveyID(s.SurveyID)}}>Select</button>
               </td>
               {Object.values(s).map(f => {
-                return <td className='cell'>{f}</td>
+                return typeof f !== 'number' ? <td className='cell'>{f}</td> : null
               })}
             </tr>
           );
@@ -45,7 +51,7 @@ function Viewing(props) {
   }
 
   const showResults = () => {
-    return 1
+    
   }
 
   return (

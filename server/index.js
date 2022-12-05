@@ -80,7 +80,7 @@ app.post('/create_survey', (req, res) => {
     });
 });
 /************************** Get Surveys **************************/
-app.post('/get_surveys', (req, res) => {
+app.post('/get_surveys_user', (req, res) => {
     // format new user data & build query
     const user_id = req.body.user_id;
     const query = `
