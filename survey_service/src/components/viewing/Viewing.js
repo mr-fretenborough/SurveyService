@@ -16,10 +16,10 @@ function Viewing(props) {
   } 
 
   const getResults = () => {
-    Axios.post(`${props.host}:3002/get_results_survey8`, {
+    Axios.post(`${props.host}:3002/get_results_survey`, {
       survey_id: surveyid
     }).then((response) => {
-      console.log(`Response`)
+      console.log(`Response: ${response}`)
     })
   }
 
