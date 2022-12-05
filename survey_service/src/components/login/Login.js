@@ -14,6 +14,7 @@ function Login(props) {
             password: password
           }).then((response) => {
             props.loggedIn(response.data[0].UserID);
+            console.log(`response: ${response.data[0].UserID}`);
           });
     }
 

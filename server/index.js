@@ -107,8 +107,9 @@ app.post('/get_surveys_user', (req, res) => {
     db.query(query, (err, out) => {
         if (err) {
             console.log(err);
+        } else {
+            console.log("surveys found");    
         }
-        console.log("surveys found");
         res.send(out);
     });
 });
@@ -149,7 +150,7 @@ app.get('/search_questions', (req, res) => {
 /************************** Get Survey Results **************************/
 app.post('/get_results_survey', (req, res) => {
     // format new user data & build query
-    const survey_id = req.body.survey_id;
+    const survey_id = req.body.surveyid;
     const query = `
         select *
           from Questions q

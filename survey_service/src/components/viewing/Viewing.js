@@ -51,15 +51,15 @@ function Viewing(props) {
   }
 
   const showResults = () => {
-    
+    return `userid: ${props.userid}`;
   }
 
+  // getAllSurveys();
   return (
       <div className='viewing'>
-        <table className='table' border="1">{createSurveyTable()}</table>
-        <hr></hr>
-        <body>{surveyid}</body>
-        {surveyid != 0 && showResults()}
+        {/* <table className='table' border="1">{createSurveyTable()}</table> */}
+        <>{`surveyid ${surveyid}\nuserid ${props.userid}`}</>
+        {/* {surveyid != 0 && showResults()} */}
       </div>
   )
 }
