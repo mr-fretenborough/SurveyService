@@ -79,37 +79,20 @@ app.post('/create_survey', (req, res) => {
         res.send("inside");
     });
 });
-/************************** Get Surveys All **************************/
+/************************** Get Surveys **************************/
 app.post('/get_surveys', (req, res) => {
     // format new user data & build query
-    
+    const enddate = req.body.EndDate;
     //***Reminder*** Filter out by invalid End Dates */
     const query = `
-        select * from Surveys;
+        select * from Surveys where enddate=>CURDATE();
     `;
     // execute sql
     db.query(query, (err, out) => {
         if (err) {
             console.log(err);
         }
-        console.log("got surveys");
-        res.send(out);
-    });
-});
-/************************** Get Surveys User **************************/
-app.post('/get_surveys_user', (req, res) => {
-    // format new user data & build query
-    const user_id = req.body.user_id;
-    const query = `
-        select * from Surveys where UserID = ${user_id};
-    `;
-    // execute sql
-    db.query(query, (err, out) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log("surveys found");    
-        }
+        console.log("surveys found");
         res.send(out);
     });
 });
@@ -132,7 +115,7 @@ app.post('/add_response', (req, res) => {
     });
 });
 /************************** Search Questions **************************/
-app.get('/search_questions', (req, res) => {
+app.post('/get_questions_by_surveyid', (req, res) => {
     // format new question & build query
     const surveyID = req.body.surveyid;
     const query = `
@@ -144,28 +127,6 @@ app.get('/search_questions', (req, res) => {
             console.log(err);
         }
         console.log(out);
-        res.send(out);
-    });
-});
-/************************** Get Survey Results **************************/
-app.post('/get_results_survey', (req, res) => {
-    // format new user data & build query
-    const survey_id = req.body.survey_id;
-    const query = `
-        select *
-          from Questions q
-          join Responses r
-            on q.QuestionID = r.QuestionID
-         where q.SurveyID = ${survey_id}
-         order by q.QuestionID
-        ;
-    `;
-    // execute sql
-    db.query(query, (err, out) => {
-        if (err) {
-            console.log(err);
-        }
-        console.log("responses gotten");
         res.send(out);
     });
 });
