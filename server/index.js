@@ -92,7 +92,7 @@ app.post('/get_surveys', (req, res) => {
         if (err) {
             console.log(err);
         }
-        console.log("surveys found");
+        console.log("got surveys");
         res.send(out);
     });
 });
@@ -130,6 +130,111 @@ app.post('/get_questions_by_surveyid', (req, res) => {
         res.send(out);
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************** Get Surveys User ************************* Please do not overwrite this section... */ 
+app.post('/get_surveys_user', (req, res) => {
+    // format new user data & build query
+    const user_id = req.body.user_id;
+    //***Reminder*** Filter out by invalid End Dates */
+    const query = `
+        select * from Surveys where UserID = ${user_id};
+    `;
+    // execute sql
+    db.query(query, (err, out) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("surveys found");
+        }
+        res.send(out);
+    });
+});
+/************************** Get Results Survey **************************/ 
+app.post('/get_results_survey', (req, res) => {
+    // format new user data & build query
+    const survey_id = req.body.survey_id;
+    //***Reminder*** Filter out by invalid End Dates */
+    const query = `
+        select * 
+          from Questions q 
+          join Responses r
+            on q.QuestionID = r.QuestionID
+         where q.SurveyID = ${survey_id}
+         order by q.QuestionID
+        ;
+    `;
+    // execute sql
+    db.query(query, (err, out) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("surveys found");
+        }
+        res.send(out);
+    });
+});
+/************************** Get Questions **************************/ 
+app.post('/get_questions', (req, res) => {
+    // format new user data & build query
+    const survey_id = req.body.survey_id;
+    //***Reminder*** Filter out by invalid End Dates */
+    const query = `
+        select * 
+          from Questions q 
+         where q.SurveyID = ${survey_id}
+         order by q.QuestionID
+        ;
+    `;
+    // execute sql
+    db.query(query, (err, out) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("surveys found");
+        }
+        res.send(out);
+    });
+});
+
+
+
+
+
+
+
+
 /************************** Port Listener **************************/
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`)
