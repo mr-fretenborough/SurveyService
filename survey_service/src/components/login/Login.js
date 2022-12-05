@@ -2,18 +2,18 @@ import { useState } from "react";
 import Axios from 'axios';
 
 
-function Login({ loggedIn }) {
+function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     
     const authenticateUser = () => {
         if (!email || !password) return false;
 
-        Axios.post("http://18.207.227.234:3002/authenticate_user", {
+        Axios.post(`${props.host}authenticate_user`, {
             email: email,
             password: password
           }).then((response) => {
-            loggedIn(response.data[0].UserID);
+            props.loggedIn(response.data[0].UserID);
           });
     }
 
