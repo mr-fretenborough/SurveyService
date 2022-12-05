@@ -21,16 +21,31 @@ function Participation(props) {
     }
 
     //displayQuestions;
-    //useEffect(() => {
-        //Axios.post(`${props.host}:3002/search_questions`, {
-            //surveyid: surveyid
-          //}).then((response) => {
-            //setQuestions(response.data);
-          //});
-    //})
+    const getQuestions = () => {
+        Axios.post(`${props.host}:3002/get_questions_by_surveyid`, {
+            surveyid: surveyid
+            }).then((response) => {
+            setQuestions(response.data);
+            });
+    }
 
-    const getSurveyID = (event) => {
-        console.log(event.target.getAttribute('key')); 
+    const displayQuestion = (c) => {
+        if(c.QuestionType==0){
+            return(
+                <div key={c.QuestionID}>
+                <text>{c.Question}</text>
+                <input type="text" placeholder="Type 0..."></input>
+                </div>
+                )
+        }else{
+           return(
+                <div key={c.QuestionID}>
+                <text>{c.Question}</text>
+                <input type="text" placeholder="Type 1..."></input>
+                </div>
+            ) 
+        }
+        
     }
 
     return (
@@ -56,7 +71,12 @@ function Participation(props) {
                         <td>{c.Description}</td>
                         <td>{c.StartDate}</td>
                         <td>{c.EndDate}</td>
-                        <td><button onClick={() => {setSurveyID(c.SurveyID)}}>Select</button></td>
+                        <td><button onClick={() => {
+                                                    setSurveyID(c.SurveyID);
+                                                    getQuestions();
+                                                    }}>
+                                                    Select
+                            </button></td>
                         </tr>
                     )}
                 </tbody>
@@ -64,13 +84,11 @@ function Participation(props) {
                 <div id="questions">
                     {
                     questionsList.map(c =>
-                        <div key={c.id}>
-                        <text>{c.Question}</text>
-                        <input type="text" placeholder="Your Response..."></input>
-                        </div>
+                        displayQuestion(c)
                     )}
                 </div>
-            <>{`surveyid ${surveyid}\nuserid ${props.userid}`}</>                
+            <>{`surveyid ${surveyid}\nuserid ${props.userid}`}</>    
+                        
         </div>
     )
 }

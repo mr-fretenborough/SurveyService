@@ -113,3 +113,4 @@ git push
 
 
 insert into Surveys (UserID, Title, Description, StartDate, EndDate) values (15, "kier", "kier", CURRENT_DATE, CURRENT_DATE);
+insert into Questions (SurveyID,QuestionType,Question) values (2,1,"This is the Question");
