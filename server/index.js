@@ -72,17 +72,16 @@ app.post('/create_survey', (req, res) => {
     const endDate = req.body.endDate;
 
     // get question data
-    const sid = req.body.survey_id;
     const questions = req.body.questions;
     const questionType = req.body.questionType;
 
     const survey_query = `
-        insert into  Surveys (UserID, Title, Description, StartDate, EndDate) values (${userid}, ${title}, ${description}, ${startDate}, ${endDate})
+        insert into  Surveys (UserID, Title, Description, StartDate, EndDate) values (${userid}, ${"title"}, ${"description"}, ${"startDate"}, ${"endDate"})
     `;
 
     const questions_query = `
         insert into Questions (SurveyID, QuestionType, Question) values (${sid}, ${questionType}, ${questions})
-    `
+    `;
     // execute sql
     db.query(survey_query, (err, out) => {
         if (err) {

@@ -8,23 +8,18 @@ function Creation(props) {
     const [start, setStart] = useState("");
     const [end, setEnd] = useState("");
     const [description, setDescription] = useState("");
-    const [questionList, setQuestionList] = useState([{ question: "" }]);
-    const [typeValue, setTypeValue] = useState("");
+    const [questionList, setQuestionList] = useState([{ question: "", typeValue: 0 }]);
 
     console.log(questionList);
 
     const createSurvey = () => {
         Axios.post(`${props.host}:3002/create_survey`, {
-            body: {
+                userid: props.userid,
                 title: title,
                 startDate: start,
                 endDate: end,
                 description: description,
-                questionList: {
-                  question: questionList,
-                  typeValue: typeValue
-                }
-            }
+                questionList: questionList
         }).then(res => {
             console.log(res);
             console.log(res.data);
@@ -119,7 +114,7 @@ function Creation(props) {
                     <select 
                         name="typeValue" 
                         id="typeValue"
-                        onChange={(e) => setTypeValue(e.target.value)}
+                        onChange={(e) => setQuestionList.typeValue(e.target.value)}
                     > 
                         <option value = "type 1">Free Response</option>
                         <option value = "type 2">Rating</option>
