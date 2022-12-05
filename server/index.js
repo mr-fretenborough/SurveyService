@@ -169,7 +169,12 @@ app.post('/get_surveys_user', (req, res) => {
     const user_id = req.body.user_id;
     //***Reminder*** Filter out by invalid End Dates */
     const query = `
-        select * from Surveys where UserID = ${user_id};
+        select SurveyID
+             , Title
+             , Description
+             , StartDate
+             , EndDate
+          from Surveys where UserID = ${user_id};
     `;
     // execute sql
     db.query(query, (err, out) => {
