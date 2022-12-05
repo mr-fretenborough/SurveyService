@@ -1,0 +1,17 @@
+.viewing {
+    display: flex
+}
+
+.table {
+    flex-basis: 100%;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.row {
+    flex-basis: 100%;
+}
+
+.cell {
+    flex-basis: 10%;
+}

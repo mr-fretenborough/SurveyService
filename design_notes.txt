@@ -110,3 +110,6 @@ git add .
 git commit -m "your message"
 
 git push
+
+
+insert into Surveys (UserID, Title, Description, StartDate, EndDate) values (15, "kier", "kier", CURRENT_DATE, CURRENT_DATE);

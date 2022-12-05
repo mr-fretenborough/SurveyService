@@ -7,7 +7,7 @@ import Viewing from '../viewing/Viewing';
 
 function App(props) {
   const [view, setView] = useState(0);
-  const [userid, setUserID] = useState();
+  const [userid, setUserID] = useState(0);
 
   const loggedIn = (uid) => {
     setUserID(uid);
@@ -27,7 +27,7 @@ function App(props) {
       {view === 0 && <Login host={props.host} loggedIn={loggedIn}/>}
       {view === 1 && <Creation/>}
       {view === 2 && <Participation/>}
-      {view === 3 && <Viewing host={props.host} userid={props.userid}/>}
+      {view === 3 && <Viewing host={props.host} userid={userid}/>}
     </div>
   );
 }
