@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import Axios from 'axios';
 import './App.css';
 import Login from '../login/Login';
 import Creation from '../creation/Creation';
 import Participation from '../participation/Participation';
 import Viewing from '../viewing/Viewing';
 
-function App() {
+function App(props) {
   const [view, setView] = useState(0);
   const [userid, setUserID] = useState();
 
@@ -25,7 +24,7 @@ function App() {
           <button className="button" onClick={() => setView(3)}>Survey Results</button>
         </h1>
       }
-      {view === 0 && <Login loggedIn={loggedIn}/>}
+      {view === 0 && <Login host={props.host} loggedIn={loggedIn}/>}
       {view === 1 && <Creation/>}
       {view === 2 && <Participation/>}
       {view === 3 && <Viewing/>}
