@@ -16,7 +16,7 @@ function Viewing(props) {
   } 
 
   const getResults = () => {
-    Axios.post(`${props.host}:3002/get_results_survey`, {
+    Axios.post(`${props.host}:3002/get_results_survey8`, {
       survey_id: surveyid
     }).then((response) => {
       console.log(`Response`)
