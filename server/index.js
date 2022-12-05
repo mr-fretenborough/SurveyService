@@ -79,13 +79,29 @@ app.post('/create_survey', (req, res) => {
         res.send("inside");
     });
 });
-/************************** Get Surveys **************************/
-app.post('/get_surveys_user', (req, res) => {
+/************************** Get Surveys All **************************/
+app.post('/get_surveys', (req, res) => {
     // format new user data & build query
     
     //***Reminder*** Filter out by invalid End Dates */
     const query = `
         select * from Surveys;
+    `;
+    // execute sql
+    db.query(query, (err, out) => {
+        if (err) {
+            console.log(err);
+        }
+        console.log("got surveys");
+        res.send(out);
+    });
+});
+/************************** Get Surveys User **************************/
+app.post('/get_surveys_user', (req, res) => {
+    // format new user data & build query
+    const user_id = req.body.userid;
+    const query = `
+        select * from Surveys where UserID = ${user_id};
     `;
     // execute sql
     db.query(query, (err, out) => {
