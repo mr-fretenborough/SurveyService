@@ -85,7 +85,7 @@ app.post('/get_surveys', (req, res) => {
     const enddate = req.body.EndDate;
     //***Reminder*** Filter out by invalid End Dates */
     const query = `
-        select * from Surveys where enddate=>CURDATE();
+        select * from Surveys where enddate>=CURDATE();
     `;
     // execute sql
     db.query(query, (err, out) => {

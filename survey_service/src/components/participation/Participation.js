@@ -5,7 +5,6 @@ import './Participation.css';
 
 function Participation(props) {
     
-    const [userid, setUserID] = useState("");
     const [surveyid, setSurveyID] = useState("");
     const [surveyList, setSurveys] = useState([]);
     const [questionsList, setQuestions] = useState([]);
@@ -22,13 +21,13 @@ function Participation(props) {
     }
 
     //displayQuestions;
-    useEffect(() => {
-        Axios.post(`${props.host}:3002/search_questions`, {
-            surveyid: surveyid
-          }).then((response) => {
-            setQuestions(response.data);
-          });
-    })
+    //useEffect(() => {
+        //Axios.post(`${props.host}:3002/search_questions`, {
+            //surveyid: surveyid
+          //}).then((response) => {
+            //setQuestions(response.data);
+          //});
+    //})
 
     const getSurveyID = (event) => {
         console.log(event.target.getAttribute('key')); 
@@ -57,7 +56,7 @@ function Participation(props) {
                         <td>{c.Description}</td>
                         <td>{c.StartDate}</td>
                         <td>{c.EndDate}</td>
-                        <td><button key={c.SurveyID} onClick={getSurveyID}>Select</button></td>
+                        <td><button onClick={() => {setSurveyID(c.SurveyID)}}>Select</button></td>
                         </tr>
                     )}
                 </tbody>
@@ -71,7 +70,7 @@ function Participation(props) {
                         </div>
                     )}
                 </div>
-
+            <>{`surveyid ${surveyid}\nuserid ${props.userid}`}</>                
         </div>
     )
 }
