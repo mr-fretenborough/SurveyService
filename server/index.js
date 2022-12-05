@@ -176,7 +176,7 @@ app.post('/get_surveys_user', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log("surveys found");
+            console.log("found surveys");
         }
         res.send(out);
     });
@@ -200,7 +200,7 @@ app.post('/get_results_survey', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log("surveys found");
+            console.log("found results");
         }
         res.send(out);
     });
@@ -222,7 +222,7 @@ app.post('/get_questions', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log("surveys found");
+            console.log("got questions");
         }
         res.send(out);
     });
