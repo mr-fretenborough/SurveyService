@@ -157,7 +157,7 @@ app.post('/get_results_survey', (req, res) => {
           join Responses r
             on q.QuestionID = r.QuestionID
          where q.SurveyID = ${survey_id}
-         order by QuestionID
+         order by q.QuestionID
         ;
     `;
     // execute sql
