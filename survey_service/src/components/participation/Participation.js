@@ -3,22 +3,20 @@ import Axios from 'axios';
 
 function Participation() {
     
-    const [surveyid, setSurveyID] = useState("");
     const [userid, setUserID] = useState("");
+    const [surveyid, setSurveyID] = useState("");
+    const [surveyList, setSurveys] = useState([]);
     const [questionsList, setQuestions] = useState([]);
     const [responsesList, setResponses] = useState([]);
 
-    const displayQuestions = () => {
-        Axios.get("http://18.207.227.234:3002/search_questions", {
-            //questions: questionsList
-
+    //displaySurveys;
+    useEffect(() => {
+        Axios.get("http://18.207.227.234:3002/get_surveys", {
+            
           }).then((response) => {
-            //questions = questionsList
+            setSurveys(response.data);
           });
-          //Console.log(questions);
-
-          //setQuestions(questions);
-    }
+    })
 
     //displayQuestions;
     useEffect(() => {
@@ -31,14 +29,24 @@ function Participation() {
 
     return (
         <div>
-            <div id="questions">
+            <div id="surveys">
                 {
-                questionsList.map(c =>
+                surveyList.map(c =>
                     <div key={c.id}>
-                    <text>{c.Question}</text>
-                    <input type="text" placeholder="Your Response..."></input>
+                    <text>{c.Title}</text>
+                    <text>{c.Description}</text>
                     </div>
                 )}
+                
+                <div id="questions">
+                    {
+                    questionsList.map(c =>
+                        <div key={c.id}>
+                        <text>{c.Question}</text>
+                        <input type="text" placeholder="Your Response..."></input>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     )
