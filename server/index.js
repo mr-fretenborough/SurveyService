@@ -88,8 +88,8 @@ app.post('/create_survey', (req, res) => {
         if (err) {
             console.log(err);
         }
-        console.log(out);
-        res.send("survey info posted");
+        console.log("survey info posted");
+        res.send(out);
     });
     db.query(questions_query, (err, out) => {
         if (err) {
