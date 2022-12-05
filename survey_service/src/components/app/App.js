@@ -24,7 +24,7 @@ function App(props) {
           <button className="button" onClick={() => setView(3)}>Survey Results</button>
         </h1>
       }
-      {view === 0 && <Login host={props.host}loggedIn={loggedIn}/>}
+      {view === 0 && <Login host={props.host} loggedIn={loggedIn}/>}
       {view === 1 && <Creation/>}
       {view === 2 && <Participation/>}
       {view === 3 && <Viewing/>}

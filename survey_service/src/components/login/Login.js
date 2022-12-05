@@ -9,7 +9,7 @@ function Login(props) {
     const authenticateUser = () => {
         if (!email || !password) return false;
 
-        Axios.post(`${props.host}authenticate_user`, {
+        Axios.post(`${props.host}:3002/authenticate_user`, {
             email: email,
             password: password
           }).then((response) => {
