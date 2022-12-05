@@ -79,37 +79,19 @@ app.post('/create_survey', (req, res) => {
         res.send("inside");
     });
 });
-/************************** Create Response **************************/
-app.post('/add_response', (req, res) => {
-    // format new response data & build query
-    const userID = req.body.userid;
-    const questionID = req.body.questionid;
-    const response = req.body.response;
+/************************** Get Surveys **************************/
+app.post('/get_surveys', (req, res) => {
+    // format new user data & build query
+    const user_id = req.body.user_id;
     const query = `
-        insert into Responses (UserID, QuestionID, Response) values (${userID}, ${questionID}, ${response});
+        select * from Surveys where UserID = ${user_id};
     `;
     // execute sql
     db.query(query, (err, out) => {
         if (err) {
             console.log(err);
         }
-        console.log(out);
-        res.send("inside");
-    });
-});
-/************************** Search Questions **************************/
-app.get('/search_questions', (req, res) => {
-    // format new question & build query
-    const surveyID = req.body.surveyid;
-    const query = `
-        select * from Questions where SurveyID = "${surveyID}";
-    `;
-    // execute sql
-    db.query(query, (err, out) => {
-        if (err) {
-            console.log(err);
-        }
-        console.log(out);
+        console.log("surveys found");
         res.send(out);
     });
 });
