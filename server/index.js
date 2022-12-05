@@ -79,6 +79,40 @@ app.post('/create_survey', (req, res) => {
         res.send("inside");
     });
 });
+/************************** Create Response **************************/
+app.post('/add_response', (req, res) => {
+    // format new response data & build query
+    const userID = req.body.userid;
+    const questionID = req.body.questionid;
+    const response = req.body.response;
+    const query = `
+        insert into Responses (UserID, QuestionID, Response) values (${userID}, ${questionID}, ${response});
+    `;
+    // execute sql
+    db.query(query, (err, out) => {
+        if (err) {
+            console.log(err);
+        }
+        console.log(out);
+        res.send("inside");
+    });
+});
+/************************** Search Questions **************************/
+app.get('/search_questions', (req, res) => {
+    // format new question & build query
+    const surveyID = req.body.surveyid;
+    const query = `
+        select * from Questions where SurveyID = "${surveyID}";
+    `;
+    // execute sql
+    db.query(query, (err, out) => {
+        if (err) {
+            console.log(err);
+        }
+        console.log(out);
+        res.send(out);
+    });
+});
 /************************** Port Listener **************************/
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`)
