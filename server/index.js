@@ -187,7 +187,8 @@ app.post('/get_results_survey', (req, res) => {
     const survey_id = req.body.survey_id;
     //***Reminder*** Filter out by invalid End Dates */
     const query = `
-        select * 
+        select q.QuestionID
+             , r.Response
           from Questions q 
           join Responses r
             on q.QuestionID = r.QuestionID
