@@ -1,0 +1,12 @@
+.table,th,td {
+    border: 1px solid;
+}
+
+.table {
+    flex-basis: 100%;
+    width:90%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    flex-grow: 1;
+}
