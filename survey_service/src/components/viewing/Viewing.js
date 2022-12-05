@@ -7,7 +7,7 @@ function Viewing(props) {
   const [surveys, setSurveys] = useState([]);
 
   const getAllSurveys = () => {
-    Axios.post(`${props.host}:3002/get_surveys`, {
+    Axios.post(`${props.host}:3002/get_surveys_user`, {
       user_id: props.userid 
     }).then((response) => {
       console.log(`Response: ${response.data}\nUserID: ${props.userid}`);
@@ -16,7 +16,7 @@ function Viewing(props) {
   } 
 
   const getResults = () => {
-    Axios.post(`${props.host}:3002/get_results`, {
+    Axios.post(`${props.host}:3002/get_results_survey`, {
       survey_id: surveyid
     }).then((response) => {
       console.log(`Response`)

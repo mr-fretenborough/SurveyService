@@ -95,6 +95,28 @@ app.post('/get_surveys_user', (req, res) => {
         res.send(out);
     });
 });
+/************************** Get Survey Results **************************/
+app.post('/get_results_survey', (req, res) => {
+    // format new user data & build query
+    const survey_id = req.body.survey_id;
+    const query = `
+        select *
+          from Questions q
+          join Responses r
+            on q.QuestionID = r.QuestionID
+         where q.SurveyID = ${survey_id}
+         order by QuestionID
+        ;
+    `;
+    // execute sql
+    db.query(query, (err, out) => {
+        if (err) {
+            console.log(err);
+        }
+        console.log("surveys found");
+        res.send(out);
+    });
+});
 /************************** Port Listener **************************/
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`)
