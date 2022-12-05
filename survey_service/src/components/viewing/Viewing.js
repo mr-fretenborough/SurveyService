@@ -19,7 +19,7 @@ function Viewing(props) {
     Axios.post(`${props.host}:3002/get_results_survey`, {
       survey_id: surveyid
     }).then((response) => {
-      console.log(`Response get_results_survey: ${response}`)
+      console.log(`Response get_results_survey: ${Object.values(response.data)}`)
     })
   }
 
