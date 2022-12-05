@@ -165,7 +165,7 @@ app.post('/get_results_survey', (req, res) => {
         if (err) {
             console.log(err);
         }
-        console.log("surveys found");
+        console.log("responses gotten");
         res.send(out);
     });
 });

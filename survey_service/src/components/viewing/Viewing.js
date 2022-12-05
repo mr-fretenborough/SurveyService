@@ -7,7 +7,6 @@ function Viewing(props) {
   const [surveys, setSurveys] = useState([]);
 
   const getAllSurveys = () => {
-    console.log(`axios userid: ${props.userid}`)
     Axios.post(`${props.host}:3002/get_surveys_user`, {
       user_id: props.userid 
     }).then((response) => {
@@ -20,7 +19,7 @@ function Viewing(props) {
     Axios.post(`${props.host}:3002/get_results_survey`, {
       survey_id: surveyid
     }).then((response) => {
-      console.log(`Response: ${response}`)
+      console.log(`Response get_results_survey: ${response}`)
     })
   }
 
@@ -52,15 +51,15 @@ function Viewing(props) {
   }
 
   const showResults = () => {
-    return `userid: ${props.userid}`;
+    getResults();
   }
 
   // getAllSurveys();
   return (
       <div className='viewing'>
-        {/* <table className='table' border="1">{createSurveyTable()}</table> */}
+        <table className='table' border="1">{createSurveyTable()}</table>
         <>{`surveyid ${surveyid}\nuserid ${props.userid}`}</>
-        {/* {surveyid != 0 && showResults()} */}
+        {surveyid != 0 && showResults()}
       </div>
   )
 }

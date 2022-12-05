@@ -12,7 +12,6 @@ function App(props) {
   const loggedIn = (uid) => {
     setUserID(uid);
     setView(5); // 5 is an arbitrary number
-    console.log(`userid: ${userid}\n`);
   }
 
   return (
