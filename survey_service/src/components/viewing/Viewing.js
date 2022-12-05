@@ -7,6 +7,7 @@ function Viewing(props) {
   const [surveys, setSurveys] = useState([]);
 
   const getAllSurveys = () => {
+    console.log(`axios userid: ${props.userid}`)
     Axios.post(`${props.host}:3002/get_surveys_user`, {
       user_id: props.userid 
     }).then((response) => {

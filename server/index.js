@@ -99,7 +99,7 @@ app.post('/get_surveys', (req, res) => {
 /************************** Get Surveys User **************************/
 app.post('/get_surveys_user', (req, res) => {
     // format new user data & build query
-    const user_id = req.body.userid;
+    const user_id = req.body.user_id;
     const query = `
         select * from Surveys where UserID = ${user_id};
     `;
@@ -150,7 +150,7 @@ app.get('/search_questions', (req, res) => {
 /************************** Get Survey Results **************************/
 app.post('/get_results_survey', (req, res) => {
     // format new user data & build query
-    const survey_id = req.body.surveyid;
+    const survey_id = req.body.survey_id;
     const query = `
         select *
           from Questions q
