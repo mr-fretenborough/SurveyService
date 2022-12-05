@@ -97,22 +97,43 @@ function Viewing(props) {
     ))
   }
   const showResults = () => {
-    return qtype ? (
-      1
-    ) : (
-      2
+    if (!noresults && !results.length) getResults();
+    return (noresults ? <h1>Question has no responses to display.</h1> : (
+      (qtype ? numResponse(selectR()) : worResponse(selectR()))
+    ));
+  }
+  const numResponse = (r) => {
+    let total = 0;
+    for (let i = 0; i < r.length; i++) total += r[i].Response;
+    return (
+      <>
+        <p>{`Mean: ${total / r.length}`}</p>
+      </>
+    )
+  }
+  const worResponse = (r) => {
+    return (
+      <>
+        {r.map(r => {
+          return <><hr/><p>r.Response</p></>
+        })}
+      </>
     );
   }
-  const showSurveyssss = () => {
-    return 1;
+  const selectR = () => {
+    let r = [];
+    for (let i = 0; i < results.length; i++) 
+      if (results[i].QuestionID = questionid)
+        r.push(results[i]);
+    return r;
   }
 
   return (
       <div className='viewing'>
         <>{`surveyid:${surveyid}   questionid:${questionid}`}</>
         {showSurveys()}
-        {surveyid && showQuestions()}
-        {questionid && showResults()}
+        {surveyid !== 0 && showQuestions()}
+        {questionid !== 0 && showResults()}
       </div>
   )
 }
