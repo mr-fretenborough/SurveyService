@@ -27,7 +27,7 @@ function App(props) {
       {view === 0 && <Login host={props.host} loggedIn={loggedIn}/>}
       {view === 1 && <Creation/>}
       {view === 2 && <Participation/>}
-      {view === 3 && <Viewing/>}
+      {view === 3 && <Viewing host={props.host} userid={props.userid}/>}
     </div>
   );
 }
