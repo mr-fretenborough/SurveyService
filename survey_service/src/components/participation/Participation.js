@@ -9,7 +9,8 @@ function Participation(props) {
     const [surveyList, setSurveys] = useState([]);
     const [nosurveys,   setNoSurveys]   = useState(0);
     const [questionsList, setQuestions] = useState([]);
-    const [responsesList, setResponseList] = useState([""]);
+    const [responsesList, setResponseList] = useState([]);
+    const [responsequestionsList, setResponseQuestionList] = useState([]);
 
     //firstLoadSurveys;
     const loadSurveys = () => {
@@ -31,9 +32,8 @@ function Participation(props) {
             surveyid: SurveyID
             }).then((response) => {
             setQuestions(response.data);
-            for(let i=0;i<questionsList.length;i++){
-                
-            }
+            if (!responseList.length) for (let i = 0; i < questionList.length; i++) setResponseList(responseList.push(""));
+            if (!responsequestionList.length) for (let i = 0; i < questionList.length; i++) setResponseQuestionList(responsequestionList.push(""));
             console.log(response.data);
             });
     }
@@ -46,7 +46,7 @@ function Participation(props) {
                 <td><select 
                         name="typeValue" 
                         id="typeValue"
-                        //onChange={(e) => {let new_r = R; new_r[i]=e.target.val;set}}
+                        onChange={(e) => {let new_r = responsesList; new_r[i]=e.target.val;setResponseList(new_r);let new_rq = responsequestionsList; new_r[i]=c.QuestionID;setResponseQuestionList(new_rq)}}
                     > 
                         <option value = "1">1</option>
                         <option value = "2">2</option>
@@ -61,36 +61,25 @@ function Participation(props) {
            return(
                 <tr key={c.QuestionID}>
                 <td>{c.Question}</td>
-                <td><input type="text" placeholder="Text Response..." onChange={(e) => "setResponseList.response(e.target.value); setResponseList.questionid(c.QuestionID)"}></input>
+                <td><input type="text" placeholder="Text Response..." onChange={(e) => {let new_r = responsesList; new_r[i]=e.target.val;setResponseList(new_r);let new_rq = responsequestionsList; new_r[i]=c.QuestionID;setResponseQuestionList(new_rq)}}></input>
                 </td>
                 </tr>
             ) 
         }
     }
 
-    //displayQuestions;
     const postResponses = () => {
-        console.log(responsesList.data);
-        return(
-            <div>
-            {
-            responsesList.map(r =>
-            <div>{postResponse(r)}</div>
-                
-            )}
-            </div>
-        )
-    }
-
-    const postResponse = (r) => {
-        Axios.post(`${props.host}:3002/add_response`, {
-            userid: props.userid,
-            questionid: r.questionid,
-            response: r.response
-            }).then((response) => {
-            setQuestions(response.data);
-            console.log(response.data);
-            });
+        for (let i = 0; i<responsesList.length; i++){
+            Axios.post(`${props.host}:3002/add_response`, {
+                userid: props.userid,
+                questionid: responsesquestionList[i],
+                response: responsesList[i]
+                }).then((response) => {
+                setQuestions(response.data);
+                console.log(response.data);
+                 });
+        }
+        
     }
 
     return (
@@ -117,7 +106,7 @@ function Participation(props) {
                         <td>{c.Description}</td>
                         <td>{c.StartDate}</td>
                         <td>{c.EndDate}</td>
-                        <td><button onClick={() => {setSurveyID(c.SurveyID);getQuestions(c.SurveyID);}}>Select</button></td>
+                        <td><button onClick={() => {setSurveyID(c.SurveyID);getQuestions(c.SurveyID);setResponseList([])}}>Select</button></td>
                         </tr>
                     )}
                 </tbody>
