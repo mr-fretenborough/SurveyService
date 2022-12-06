@@ -14,12 +14,12 @@ function Creation(props) {
 
     const createSurvey = () => {
         Axios.post(`${props.host}:3002/create_survey`, {
-                userid: props.userid,
-                title: title,
-                startDate: start,
-                endDate: end,
-                description: description,
-                questionList: questionList
+            userid: props.userid,
+            title: title,
+            startDate: start,
+            endDate: end,
+            description: description,
+            questionList: questionList
         }).then(res => {
             console.log(res);
             console.log(res.data);

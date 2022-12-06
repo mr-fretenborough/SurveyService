@@ -76,12 +76,13 @@ app.post('/create_survey', (req, res) => {
     const questionType = req.body.questionType;
 
     const survey_query = `
-        insert into  Surveys (UserID, Title, Description, StartDate, EndDate) values (${userid}, ${"title"}, ${"description"}, ${"startDate"}, ${"endDate"})
+        insert into  Surveys (UserID, Title, Description, StartDate, EndDate) values (${userid}, "${title}", "${description}", "${startDate}", "${endDate}")
     `;
 
-    const questions_query = `
-        insert into Questions (SurveyID, QuestionType, Question) values (${sid}, ${questionType}, ${questions})
+    const get_survey_id = `
+        select SurveyID from Surveys where UserID = ${userid}, Title = "${title}", Description = "${description}", StartDate = "${startDate}", EndDate = "${endDate}"
     `;
+    
     // execute sql
     db.query(survey_query, (err, out) => {
         if (err) {
@@ -89,13 +90,13 @@ app.post('/create_survey', (req, res) => {
         }
         console.log("survey info posted");
         res.send(out);
-    });
-    db.query(questions_query, (err, out) => {
-        if (err) {
-            console.log(err);
-        }
-        console.log("questions posted");
-        res.send(out);
+        db.query(get_survey_id, (err, out) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log("survey id found")
+            res.send(out);
+        })
     });
 });
 /************************** Get Surveys **************************/
