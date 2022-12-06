@@ -72,13 +72,13 @@ function Creation(props) {
         <div>
             <label> 
                 Start: <input 
-                    type="text" 
+                    type="date" 
                     id="start" 
-                    name="start" 
+                    name="start"
                     onChange={(e) => setStart(e.target.value)}
                     required/>
                 End: <input 
-                    type="text" 
+                    type="date" 
                     id="end" 
                     name="end" 
                     onChange={(e) => setEnd(e.target.value)} 
@@ -112,12 +112,13 @@ function Creation(props) {
                 <label>
                     Select question type:
                     <select 
+                        input="boolean"
                         name="typeValue" 
                         id="typeValue"
                         onChange={(e) => setQuestionList.typeValue(e.target.value)}
                     > 
-                        <option value = "type 1">Free Response</option>
-                        <option value = "type 2">Rating</option>
+                        <option value = "0">Free Response</option>
+                        <option value = "1">Rating</option>
                     </select>
                 </label>
                 </div>

@@ -96,7 +96,6 @@ app.post('/create_survey', (req, res) => {
             }
             if(out) {
                 console.log("survey id found")
-                res.send(out);
             }
             else console.log("survey id not found")
         })
