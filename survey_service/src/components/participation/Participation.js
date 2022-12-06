@@ -61,13 +61,13 @@ function Participation(props) {
             let r = [];
             let q = [];
             for (let i = 0; i < response.data.length; i++) {
-                r.push("");
+                r.push(response.data[i].QuestionType ? "1" : "Empty.");
                 q.push(response.data[i].QuestionID);
             }
             setResponses(r);
             setQRM(q);
             
-            // console.log(`getQuestions: ${response.data}`);
+            // console.log(`r: ${r}`);
         });
     }
 
@@ -123,6 +123,7 @@ function Participation(props) {
 
     const saveResponse = (v, i) => {
         let r = responses;
+        console.log(v);
         r[i] = v;
         setResponses(r); 
     }

@@ -132,6 +132,7 @@ app.post('/add_response', (req, res) => {
                 console.log(err);
             }
             console.log(`response ${i} inserted`);
+            console.log(out);
         });
     }
 });
