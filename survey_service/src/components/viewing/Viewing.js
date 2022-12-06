@@ -50,26 +50,30 @@ function Viewing(props) {
     if (!nosurveys && !surveys.length) getSurveys();
     return (nosurveys ? <h2>You have no surveys to display.</h2> : (
       <table>
-        <tr>
-          <td>Selection</td>
-          <td>Title</td>
-          <td>Description</td>
-          <td>Start Date</td>
-          <td>End Date</td>
-        </tr>
-        {surveys.map(s => {
-          return (
-            <tr>
-              <td>
-                <button onClick={() => {setSurveyID(s.SurveyID)}}>Select</button>
-              </td>
-              <td>{s.Title}</td>
-              <td>{s.Description}</td>
-              <td>{s.StartDate}</td>
-              <td>{s.EndDate}</td>
-            </tr>
-          )
-        })}
+        <thead>
+          <tr>
+            <th>Selection</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {surveys.map(s => {
+            return (
+              <tr>
+                <td>
+                  <button onClick={() => {setSurveyID(s.SurveyID)}}>Select</button>
+                </td>
+                <td>{s.Title}</td>
+                <td>{s.Description}</td>
+                <td>{s.StartDate}</td>
+                <td>{s.EndDate}</td>
+              </tr>
+            )
+          })}
+        </tbody>
       </table>
     ));
   }
@@ -77,22 +81,26 @@ function Viewing(props) {
     if (!noquestions && !questions.length) getQuestions();
     return (noquestions ? <h2>Survey has no questions to display.</h2> : (
       <table>
-        <tr>
-          <td>Selection</td>
-          <td>QuestionType</td>
-          <td>Question</td>
-        </tr>
-        {questions.map(q => {
-          return (
-            <tr>
-              <td>
-                <button onClick={() => {setQuestionID(q.QuestionID); setQType(q.QuestionType)}}>Select</button>
-              </td>
-              <td>{q.QuestionType}</td>
-              <td>{q.Question}</td>
-            </tr>
-          )
-        })}
+        <thead>
+          <tr>
+            <th>Selection</th>
+            <th>QuestionType</th>
+            <th>Question</th>
+          </tr>
+        </thead>
+        <tbody>
+          {questions.map(q => {
+            return (
+              <tr>
+                <td>
+                  <button onClick={() => {setQuestionID(q.QuestionID); setQType(q.QuestionType)}}>Select</button>
+                </td>
+                <td>{q.QuestionType}</td>
+                <td>{q.Question}</td>
+              </tr>
+            )
+          })}
+        </tbody>
       </table>
     ))
   }
