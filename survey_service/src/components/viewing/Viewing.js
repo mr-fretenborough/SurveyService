@@ -24,28 +24,6 @@ function Viewing(props) {
     });
   } 
 
-  const getQuestions = () => {
-    Axios.post(`${props.host}:3002/get_questions`, {
-      survey_id: surveyid
-    }).then((response) => {
-      // {QuestionID: *, QuestionType: *, Question: *}
-      // console.log(`Response get_questions: ${Object.values(response.data[0])}`)
-      if (!response.data.length) setNoQuestions(1);
-      setQuestions(response.data);
-    })
-  }
-
-  const getResults = () => {
-    Axios.post(`${props.host}:3002/get_results_survey`, {
-      survey_id: surveyid
-    }).then((response) => {
-      // {QuestionID: *, Response: *}
-      // console.log(`Response get_results_survey: ${Object.values(response.data[0])}`)
-      if (!response.data.length) setNoResults(1);
-      setResults(response.data)
-    })
-  }
-
   const showSurveys = () => {
     if (!nosurveys && !surveys.length) getSurveys();
     return (nosurveys ? <h2>You have no surveys to display.</h2> : (
@@ -64,7 +42,7 @@ function Viewing(props) {
             return (
               <tr>
                 <td>
-                  <button onClick={() => {setSurveyID(s.SurveyID); getQuestions()}}>Select</button>
+                  <button onClick={() => {setSurveyID(s.SurveyID);}}>Select</button>
                 </td>
                 <td>{s.Title}</td>
                 <td>{s.Description}</td>
@@ -77,7 +55,20 @@ function Viewing(props) {
       </table>
     ));
   }
+
+  const getQuestions = () => {
+    Axios.post(`${props.host}:3002/get_questions`, {
+      survey_id: surveyid
+    }).then((response) => {
+      // {QuestionID: *, QuestionType: *, Question: *}
+      // console.log(`Response get_questions: ${Object.values(response.data[0])}`)
+      if (!response.data.length) setNoQuestions(1);
+      setQuestions(response.data);
+    })
+  }
+
   const showQuestions = () => {
+    if (!noquestions && !questions.length) getQuestions();
     return (noquestions ? <h2>Survey has no questions to display.</h2> : (
       <table>
         <thead>
@@ -103,7 +94,20 @@ function Viewing(props) {
       </table>
     ))
   }
+
+  const getResults = () => {
+    Axios.post(`${props.host}:3002/get_results_survey`, {
+      survey_id: surveyid
+    }).then((response) => {
+      // {QuestionID: *, Response: *}
+      console.log(`Response get_results_survey: ${Object.values(response.data[0])}`)
+      if (!response.data.length) setNoResults(1);
+      setResults(response.data)
+    })
+  }
+
   const showResults = () => {
+    if (!noresults && !results.length) getResults();
     return (noresults ? <h1>Question has no responses to display.</h1> : (
       (qtype ? numResponse(selectR()) : worResponse(selectR()))
     ));
@@ -126,10 +130,11 @@ function Viewing(props) {
     )
   }
   const worResponse = (r) => {
+    console.log(r)
     return (
       <>
-        {r.map(r => {
-          return <p>r.Response</p>
+        {r.map((r, i) => {
+          return <p>{`Response ${i+1}: ${r.Response}`}</p>
         })}
       </>
     );
