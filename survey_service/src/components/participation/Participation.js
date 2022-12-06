@@ -22,7 +22,7 @@ function Participation(props) {
         Axios.post(`${props.host}:3002/get_surveys`, {
           }).then((response) => {
             setSurveys(response.data);
-            console.log(response.data);
+            console.log("surveys" + response.data);
           });
     }
 
@@ -32,12 +32,9 @@ function Participation(props) {
                 surveyid: SurveyID
             }).then((response) => {
                 setQuestions(response.data);
-                if (!responsesList.length) 
-                    for (let i = 0; i < questionsList.length; i++) {
-                        setResponseList(responsesList.push(""));
-                        setResponseQuestionsList(responsequestionsList.push(questionsList[i].QuestionID));
-                    }
-                console.log(response.data);
+                console.log(`getQuestions response: ${response.data}\nql ${questionsList.length}`);
+            }).then((response) => {
+                console.log(questionsList);
             });
     }
 
@@ -49,7 +46,7 @@ function Participation(props) {
                 <td><select 
                         name="typeValue" 
                         id="typeValue"
-                        onChange={(e) => {let new_r = responsesList; new_r[i]=e.target.val;setResponseList(new_r);}}
+                        onChange={(e) => {let new_r = responsesList; new_r[i]=e.target.value;setResponseList(new_r);}}
                     > 
                         <option value = "1">1</option>
                         <option value = "2">2</option>
@@ -64,7 +61,7 @@ function Participation(props) {
            return(
                 <tr key={c.QuestionID}>
                 <td>{c.Question}</td>
-                <td><input type="text" placeholder="Text Response..." onChange={(e) => {let new_r = responsesList; new_r[i]=e.target.val;setResponseList(new_r);}}></input>
+                <td><input type="text" placeholder="Text Response..." onChange={(e) => {let new_r = responsesList; new_r[i]=e.target.value;setResponseList(new_r);}}></input>
                 </td>
                 </tr>
             ) 
@@ -86,6 +83,7 @@ function Participation(props) {
     }
 
     const postResponsesKier = () => {
+        console.log(`RtoQ:${responsequestionsList}\nResponses:${responsesList}\nQuestions:\n${questionsList.map(i => {return `qid:${i.QuestionID},q:${i.Question}\n`})}`);
         Axios.post(`${props.host}:3002/add_response`, {
             userid: props.userid,
             rtoq: responsequestionsList,
@@ -100,12 +98,19 @@ function Participation(props) {
     // R -> Q list init
     // create elements
     // tezt box elem onchange(changeR())
-
-
+    const initRes = () => {
+        if (!responsesList.length) 
+        for (let i = 0; i < questionsList.length; i++) {
+            console.log(`q ${questionsList[0].QuestionID} r ${responsesList}`);
+            setResponseList(responsesList.push(""));
+            setResponseQuestionsList(responsequestionsList.push(questionsList[i].QuestionID));
+        }
+    }
+    initRes();
     return (
         <div>
             Participation Page
-            if{loadSurveys()}
+            {loadSurveys()}
             <button onClick={() => refreshSurveys()}>Refresh</button>
             <div></div>
             <table  className="table table-bordered text-white" >
@@ -132,8 +137,8 @@ function Participation(props) {
                 </tbody>
             </table>
                 
-            <>{`surveyid ${surveyid}\nuserid ${props.userid}`}</>
-            
+            <br></br>
+            {/* <br></br> */}
             <br></br>
             
             <table  className="table table-bordered text-white" >

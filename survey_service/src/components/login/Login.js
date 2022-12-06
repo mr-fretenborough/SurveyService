@@ -20,7 +20,7 @@ function Login(props) {
     return (
         <div>
             <input id="emailbox" type="text" placeholder="Your Email..." onChange={(e) => setEmail(e.target.value)}></input>
-            <input id="passwordbox" type="text" placeholder="Your Password..." onChange={(e) => setPassword(e.target.value)}></input>
+            <input id="passwordbox" type="password" placeholder="Your Password..." onChange={(e) => setPassword(e.target.value)}></input>
             <button onClick={() => authenticateUser()}>Submit</button>
         </div>
     )
