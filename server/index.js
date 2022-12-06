@@ -88,6 +88,7 @@ app.post('/create_survey', (req, res) => {
             console.log("survey info posted");
             sid = result.insertId;
         }
+        console.log(questions[0])
         for (let i = 0; i < questions.length; i++) {
             let question_query = `insert into Questions (SurveyID, QuestionType, Question) values (${sid}, ${questionType[i]}, ${questions[i]})`;
             db.query(question_query, (err, result) => {
