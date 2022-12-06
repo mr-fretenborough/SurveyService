@@ -89,12 +89,12 @@ app.post('/create_survey', (req, res) => {
             sid = result.insertId;
         }
         for (let i = 0; i < questions.length; i++) {
-            let question_query = `insert into Questions (SurveyID, QuestionType, Question) values (${sid}, ${questionType[i].typeValue}, "${questions[i].question}")`;
+            let question_query = `insert into Questions (SurveyID, QuestionType, Question) values (${sid}, ${questionType[i].typeValue === 'true' ? 0 : 1}, "${questions[i].question}")`;
             db.query(question_query, (err, result) => {
                 if(err) {
                     console.log(err);
                 }
-                console.log(`inserting the ${i} question`);
+                console.log(`inserting the ${i} question. qt: ${questionType[i].typeValue}`);
             })
         }
         res.send(result);
