@@ -126,26 +126,26 @@ function Viewing(props) {
         r.push(results[i].Response);
       }
     }
-    console.log(r)
     return r;
   }
 
   const numResponse = (r) => {
     let total = 0;
+    let num = 0;
     let max = 0;
     let min = 11;
   
     for (let i = 0; i < results.length; i++) {
       if (results[i].QuestionID == questionid) {
         total += parseInt(results[i].Response);
+        num++;
         if (parseInt(results[i].Response) > max) max = parseInt(results[i].Response);
         if (parseInt(results[i].Response) < min) min = parseInt(results[i].Response);
       }
     }
-    console.log(total);
     return (
       <>
-        <p>{`Mean: ${results.length / total}`}</p>
+        <p>{`Mean: ${total / num}`}</p>
         <p>{`Range: [${min},${max}]`}</p>
       </>
     )
@@ -154,7 +154,7 @@ function Viewing(props) {
 
   return (
       <div className='viewing'>
-        <>{`surveyid:${surveyid} | questions:${questions} | response:${results}`}</>
+        {/* <>{`surveyid:${surveyid} | questions:${questionid} | response:${results}`}</> */}
         <hr className='line'/>
         {showSurveys()}
         <hr className='line'/>
