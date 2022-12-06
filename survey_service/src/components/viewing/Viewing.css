@@ -17,6 +17,10 @@
     flex-basis: 100%;
 }
 
-.qcell {
-    flex-basis: 100%;
+.line {
+    width: 90%;
+    height: 3px;
+    color:black;
+    background-color: black;
+    border-color: black;
 }
