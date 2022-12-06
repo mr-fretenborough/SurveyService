@@ -80,7 +80,7 @@ app.post('/create_survey', (req, res) => {
     `;
 
     const get_survey_id = `
-        select SurveyID from Surveys where UserID = ${userid}, Title = "${title}", Description = "${description}", StartDate = "${startDate}", EndDate = "${endDate}"
+        select SurveyID from Surveys where UserID = ${userid} and Title = "${title}" and Description = "${description}" and StartDate = "${startDate}" and EndDate = "${endDate}"
     `;
     
     // execute sql
@@ -94,8 +94,11 @@ app.post('/create_survey', (req, res) => {
             if (err) {
                 console.log(err);
             }
-            console.log("survey id found")
-            res.send(out);
+            if(out) {
+                console.log("survey id found")
+                res.send(out);
+            }
+            else console.log("survey id not found")
         })
     });
 });
