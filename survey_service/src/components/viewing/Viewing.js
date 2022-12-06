@@ -110,10 +110,18 @@ function Viewing(props) {
   }
   const numResponse = (r) => {
     let total = 0;
-    for (let i = 0; i < r.length; i++) total += r[i].Response;
+    let min = 11;
+    let max = 0;
+    for (let i = 0; i < r.length; i++) {
+      total += parseInt(r[i].Response);
+      if (parseInt(r[i].Response) > max) max = parseInt(r[i].Response);
+      if (parseInt(r[i].Response) < min) min = parseInt(r[i].Response);
+    }
+    let mean = total / r.length;
     return (
       <>
-        <p>{`Mean: ${total / r.length}`}</p>
+        <p>{`Mean: ${mean}`}</p>
+        <p>{`Range: [${min},${max}]`}</p>
       </>
     )
   }
@@ -121,7 +129,7 @@ function Viewing(props) {
     return (
       <>
         {r.map(r => {
-          return <><hr/><p>r.Response</p></>
+          return <p>r.Response</p>
         })}
       </>
     );

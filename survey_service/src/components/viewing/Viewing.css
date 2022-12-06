@@ -19,8 +19,8 @@
 
 .line {
     width: 90%;
-    height: 3px;
+    height: 1px;
     color:black;
-    background-color: black;
+    /* background-color: black; */
     border-color: black;
 }
