@@ -128,14 +128,14 @@ app.post('/add_response', (req, res) => {
     // `;
     // // execute sql
     // db.query(query, (err, out) => {
-    //     if (err) {
+    //     if (err) {              
     //         console.log(err);
     //     }
     //     console.log("response inserted");
     //     res.send(out);
     // });
 
-    for (let i = 0; i < responses.length; i++) {
+    for (let i = 0; i < response.length; i++) {
         let query = `insert into Responses (UserID, QuestionID, Response) values (${userID}, ${rtoq[i]}, "${response[i]}");`;
         db.query(query, (err, out) => {
             if (err) {

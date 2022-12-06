@@ -10,7 +10,7 @@ function Participation(props) {
     const [nosurveys,   setNoSurveys]   = useState(0);
     const [questionsList, setQuestions] = useState([]);
     const [responsesList, setResponseList] = useState([]);
-    const [responsequestionsList, setResponseQuestionList] = useState([]);
+    const [responsequestionsList, setResponseQuestionsList] = useState([]);
 
     //firstLoadSurveys;
     const loadSurveys = () => {
@@ -32,10 +32,10 @@ function Participation(props) {
                 surveyid: SurveyID
             }).then((response) => {
                 setQuestions(response.data);
-                if (!responseList.length) 
-                    for (let i = 0; i < questionList.length; i++) {
-                        setResponseList(responseList.push(""));
-                        setResponseQuestionList(responsequestionsList.push(questionsList[i].QuestionID));
+                if (!responsesList.length) 
+                    for (let i = 0; i < questionsList.length; i++) {
+                        setResponseList(responsesList.push(""));
+                        setResponseQuestionsList(responsequestionsList.push(questionsList[i].QuestionID));
                     }
                 console.log(response.data);
             });
@@ -75,7 +75,7 @@ function Participation(props) {
         for (let i = 0; i<responsesList.length; i++){
             Axios.post(`${props.host}:3002/add_response`, {
                 userid: props.userid,
-                questionid: responsesquestionList[i],
+                questionid: responsequestionsList[i],
                 response: responsesList[i]
                 }).then((response) => {
                 setQuestions(response.data);
@@ -126,7 +126,7 @@ function Participation(props) {
                         <td>{c.Description}</td>
                         <td>{c.StartDate}</td>
                         <td>{c.EndDate}</td>
-                        <td><button onClick={() => {setSurveyID(c.SurveyID);setResponseList([]);setResponseQuestionList([]);getQuestions(c.SurveyID);}}>Select</button></td>
+                        <td><button onClick={() => {setSurveyID(c.SurveyID);setResponseList([]);setResponseQuestionsList([]);getQuestions(c.SurveyID);}}>Select</button></td>
                         </tr>
                     )}
                 </tbody>
@@ -160,4 +160,4 @@ function Participation(props) {
 export default Participation;
 
 
-//if (!responseList.length) for (let i = 0; i < questionList.length; i++) setResponseList(responseList.push(""));
+//if (!responsesList.length) for (let i = 0; i < questionsList.length; i++) setResponseList(responsesList.push(""));
