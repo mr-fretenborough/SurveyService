@@ -143,9 +143,9 @@ app.post('/add_response', (req, res) => {
                 console.log(err);
             }
             console.log(`response ${i} inserted`);
-            res.send(out);
         });
     }
+    res.send(out);
 });
 /************************** Search Questions **************************/
 app.post('/get_questions_by_surveyid', (req, res) => {
