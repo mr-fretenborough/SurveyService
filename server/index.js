@@ -72,7 +72,6 @@ app.post('/create_survey', (req, res) => {
     const endDate = req.body.endDate;
 
     // get question data
-    let sid = 5;
     const questions = req.body.questions;
     const questionType = req.body.questionType;
 
@@ -82,25 +81,22 @@ app.post('/create_survey', (req, res) => {
     
     // execute sql
     db.query(survey_query, (err, result) => {
+        let sid = -1
         if (err) {
             console.log(err);
-        }
-        else {
+        } else {
             console.log("survey info posted");
-            let sid = result.insertId;
+            sid = result.insertId;
         }
-    });
-    
-    let question_query = `
-        insert into Questions (SurveyID, QuestionType, Question) values (${sid}, ${questionType}, ${questions})
-    `;
 
-    db.query(question_query, (err, result) => {
-        if(err) {
-            console.log(err);
-        }
-        result.send(out);
-    })
+        let question_query = `insert into Questions (SurveyID, QuestionType, Question) values (${sid}, ${questionType}, ${questions})`;
+        db.query(question_query, (err, result) => {
+            if(err) {
+                console.log(err);
+            }
+            result.send(out);
+        })
+    });
 });
 /************************** Get Surveys **************************/
 app.post('/get_surveys', (req, res) => {
