@@ -23,7 +23,7 @@ function Participation(props) {
         // console.log(`surveys: ${surveys}`);
         if (!surveys.length) getSurveys();
         return (!surveys.length ? <p>no surveys to show</p> : (
-            <table>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Selection</th>
@@ -75,7 +75,7 @@ function Participation(props) {
         if (!questions.length) getQuestions();
         return (!questions.length ? <p>no questions for this survey</p> : (
             <>
-                <table>
+                <table class="tablesmall">
                     <thead>
                         <tr>
                             <th>Question</th>
@@ -141,6 +141,7 @@ function Participation(props) {
     return (
         <div className="participation">
             {showSurveys()}
+            <br></br>
             {sid !== 0 && showQuestions()}
         </div>
     );
