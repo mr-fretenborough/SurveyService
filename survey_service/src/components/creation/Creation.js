@@ -9,10 +9,7 @@ function Creation(props) {
     const [end, setEnd] = useState("");
     const [description, setDescription] = useState("");
     const [questionList, setQuestionList] = useState([{ question: "" }]);
-    const [typeValueList, setTypeValueList] = useState([{ typeValue: 0 }])
-
-    console.log(questionList);
-    console.log(typeValueList);
+    const [typeValueList, setTypeValueList] = useState([{ typeValue: "" }])
     
     const createSurvey = () => {
         Axios.post(`${props.host}:3002/create_survey`, {
@@ -29,6 +26,9 @@ function Creation(props) {
         })
     }
 
+    console.log(questionList);
+    console.log(typeValueList);
+
     const handleQuestionChange = (e, index) => {
       const { name, value } = e.target;
       const list = [...questionList];
@@ -38,9 +38,9 @@ function Creation(props) {
 
     const handleTypeValueChange = (e, index) => {
         const { name, value } = e.target;
-        const list = [...typeValueList];
-        list[index][name] = value;
-        setTypeValueList(list);
+        const list2 = [...typeValueList];
+        list2[index][name] = value;
+        setTypeValueList(list2);
     }
   
     const handleQuestionRemove = (index) => {
@@ -48,9 +48,19 @@ function Creation(props) {
       list.splice(index, 1);
       setQuestionList(list);
     };
+
+    const handleTypeValueRemove = (index) => {
+        const list2 = [...typeValueList];
+        list2.splice(index, 1);
+        setTypeValueList(list2);
+    };
   
     const handleQuestionAdd = () => {
       setQuestionList([...questionList, { question: "" }]);
+    };
+
+    const handleTypeValueAdd = () => {
+        setTypeValueList([...typeValueList, { typeValue: "" }]);
     };
   
     return (
@@ -108,7 +118,6 @@ function Creation(props) {
                   onChange={(e) => handleQuestionChange(e, index)}
                   required
                 />
-                {typeValueList.map((singleType, index) => 
                     <label>
                         Select question type:
                         <select 
@@ -116,15 +125,14 @@ function Creation(props) {
                             id="typeValue"
                             onChange={(e) => handleTypeValueChange(e, index)}
                         > 
-                            <option value = {singleType.typeValue}>Free Response</option>
-                            <option value = {singleType.typeValue}>Rating</option>
+                            <option value = {""}>Free Response</option>
+                            <option value = {true}>Rating</option>
                         </select>
                     </label>
-                )}
                 {questionList.length - 1 === index && (
                   <button
                     type="button"
-                    onClick={handleQuestionAdd}
+                    onClick={() => {handleQuestionAdd(); handleTypeValueAdd();}}
                     className="add-btn"
                   >
                     <span>Add question</span>
@@ -135,7 +143,7 @@ function Creation(props) {
                 {questionList.length !== 1 && (
                   <button
                     type="button"
-                    onClick={() => handleQuestionRemove(index)}
+                    onClick={() => {handleQuestionRemove(index); handleTypeValueRemove(index);}}
                     className="remove-btn"
                   >
                     <span>Remove</span>
