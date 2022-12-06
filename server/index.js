@@ -95,7 +95,7 @@ app.post('/create_survey', (req, res) => {
                     console.log(err);
                 }
                 console.log(`inserting the ${i} question`);
-                result.send(out);
+                result.send(result);
             })
         }
     });
