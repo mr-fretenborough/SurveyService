@@ -147,6 +147,7 @@ app.post('/add_response', (req, res) => {
         });
     })
     console.log("done");
+    res.send("done");
 });
 /************************** Search Questions **************************/
 app.post('/get_questions_by_surveyid', (req, res) => {
