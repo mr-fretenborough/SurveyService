@@ -65,7 +65,7 @@ app.post('/authenticate_user', (req, res) => {
 /************************** Create Survey **************************/
 app.post('/create_survey', (req, res) => {
     // get survey data
-    const userid = req.body.user_id;
+    const userid = req.body.userid;
     const title = req.body.title;
     const description = req.body.description;
     const startDate = req.body.startDate;
