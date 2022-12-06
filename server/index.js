@@ -72,8 +72,8 @@ app.post('/create_survey', (req, res) => {
     const endDate = req.body.endDate;
 
     // get question data
-    const questions = req.body.questions;
-    const questionType = req.body.questionType;
+    const questions = req.body.questionList;
+    const questionType = req.body.typeValueList;
 
     const survey_query = `
         insert into  Surveys (UserID, Title, Description, StartDate, EndDate) values (${userid}, "${title}", "${description}", "${startDate}", "${endDate}")
