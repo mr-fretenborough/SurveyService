@@ -102,7 +102,7 @@ app.post('/create_survey', (req, res) => {
 app.post('/get_surveys', (req, res) => {
     // format new user data & build query
     const enddate = req.body.EndDate;
-    //***Reminder*** Filter out by invalid End Dates */
+    //***Reminder*** Filter out by invalid full Surveys(10 Users) */
     const query = `
         select * from Surveys where enddate>=CURDATE();
     `;

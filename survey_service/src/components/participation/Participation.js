@@ -7,25 +7,31 @@ function Participation(props) {
     
     const [surveyid, setSurveyID] = useState("");
     const [surveyList, setSurveys] = useState([]);
+    const [nosurveys,   setNoSurveys]   = useState(0);
     const [questionsList, setQuestions] = useState([]);
-    const [responsesList, setResponses] = useState([]);
+    const [responsesList, setResponses] = useState([{questionid: 0,response:""}]);
+
+    //firstLoadSurveys;
+    const loadSurveys = () => {
+        if (!nosurveys && !surveyList.length) refreshSurveys();
+    }
 
     //displaySurveys;
-    const displaySurveys = () => {
+    const refreshSurveys = () => {
         Axios.post(`${props.host}:3002/get_surveys`, {
-            
           }).then((response) => {
             setSurveys(response.data);
-            console.log(response.data)
+            console.log(response.data);
           });
     }
 
     //displayQuestions;
-    const getQuestions = () => {
+    const getQuestions = (SurveyID) => {
         Axios.post(`${props.host}:3002/get_questions_by_surveyid`, {
-            surveyid: surveyid
+            surveyid: SurveyID
             }).then((response) => {
             setQuestions(response.data);
+            console.log(response.data);
             });
     }
 
@@ -34,26 +40,62 @@ function Participation(props) {
             return(
                 <div key={c.QuestionID}>
                 <text>{c.Question}</text>
-                <input type="text" placeholder="Type 0..."></input>
+                <select 
+                        name="typeValue" 
+                        id="typeValue"
+                        onChange={(e) => "setResponseList.response(e.target.value); setResponseList.questionid(c.QuestionID)"}
+                    > 
+                        <option value = "1">1</option>
+                        <option value = "2">2</option>
+                        <option value = "3">3</option>
+                        <option value = "4">4</option>
+                        <option value = "5">5</option>
+                    </select>
+                <br></br>
                 </div>
                 )
         }else{
            return(
                 <div key={c.QuestionID}>
                 <text>{c.Question}</text>
-                <input type="text" placeholder="Type 1..."></input>
+                <input type="text" placeholder="Text Response..." onChange={(e) => "setResponseList.response(e.target.value); setResponseList.questionid(c.QuestionID)"}></input>
+                <br></br>
                 </div>
             ) 
         }
-        
+    }
+
+    //displayQuestions;
+    const postResponses = (r) => {
+        return(
+            <div>
+            {
+            responsesList.map(r =>
+            <div>{postResponses(r)}</div>
+                
+            )}
+            </div>
+        )
+    }
+
+    const postResponse = (r) => {
+        Axios.post(`${props.host}:3002/add_response`, {
+            userid: props.userid,
+            questionid: r.questionid,
+            response: r.response
+            }).then((response) => {
+            setQuestions(response.data);
+            console.log(response.data);
+            });
     }
 
     return (
         <div>
             Participation Page
-            <button onClick={() => displaySurveys()}>Refresh</button>
+            if{loadSurveys()}
+            <button onClick={() => refreshSurveys()}>Refresh</button>
             <div></div>
-            <table  className="table table-bordered text-white">
+            <table  className="table table-bordered text-white" >
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -71,23 +113,21 @@ function Participation(props) {
                         <td>{c.Description}</td>
                         <td>{c.StartDate}</td>
                         <td>{c.EndDate}</td>
-                        <td><button onClick={() => {
-                                                    setSurveyID(c.SurveyID);
-                                                    getQuestions();
-                                                    }}>
-                                                    Select
-                            </button></td>
+                        <td><button onClick={() => {setSurveyID(c.SurveyID);getQuestions(c.SurveyID);}}>Select</button></td>
                         </tr>
                     )}
                 </tbody>
             </table>
-                <div id="questions">
-                    {
-                    questionsList.map(c =>
-                        displayQuestion(c)
-                    )}
-                </div>
-            <>{`surveyid ${surveyid}\nuserid ${props.userid}`}</>    
+                
+            <>{`surveyid ${surveyid}\nuserid ${props.userid}`}</>
+            
+            <div id="questions">
+                {
+                questionsList.map(c =>
+                    displayQuestion(c)
+                )}
+            </div>
+            <button onClick={() => {postResponses();}}>Sumbit</button>   
                         
         </div>
     )
