@@ -8,10 +8,12 @@ function Creation(props) {
     const [start, setStart] = useState("");
     const [end, setEnd] = useState("");
     const [description, setDescription] = useState("");
-    const [questionList, setQuestionList] = useState([{ question: "", typeValue: 0 }]);
+    const [questionList, setQuestionList] = useState([{ question: "" }]);
+    const [typeValueList, setTypeValueList] = useState([{ typeValue: 0 }])
 
     console.log(questionList);
-
+    console.log(typeValueList);
+    
     const createSurvey = () => {
         Axios.post(`${props.host}:3002/create_survey`, {
             userid: props.userid,
@@ -19,7 +21,8 @@ function Creation(props) {
             startDate: start,
             endDate: end,
             description: description,
-            questionList: questionList
+            questionList: questionList,
+            typeValueList: typeValueList
         }).then(res => {
             console.log(res);
             console.log(res.data);
@@ -32,6 +35,13 @@ function Creation(props) {
       list[index][name] = value;
       setQuestionList(list);
     };
+
+    const handleTypeValueChange = (e, index) => {
+        const { name, value } = e.target;
+        const list = [...typeValueList];
+        list[index][name] = value;
+        setTypeValueList(list);
+    }
   
     const handleQuestionRemove = (index) => {
       const list = [...questionList];
@@ -98,6 +108,19 @@ function Creation(props) {
                   onChange={(e) => handleQuestionChange(e, index)}
                   required
                 />
+                {typeValueList.map((singleType, index) => 
+                    <label>
+                        Select question type:
+                        <select 
+                            name="typeValue" 
+                            id="typeValue"
+                            onChange={(e) => handleTypeValueChange(e, index)}
+                        > 
+                            <option value = {singleType.typeValue}>Free Response</option>
+                            <option value = {singleType.typeValue}>Rating</option>
+                        </select>
+                    </label>
+                )}
                 {questionList.length - 1 === index && (
                   <button
                     type="button"
@@ -108,20 +131,6 @@ function Creation(props) {
                   </button>
                 )}
               </div>
-              <div>
-                <label>
-                    Select question type:
-                    <select 
-                        input="boolean"
-                        name="typeValue" 
-                        id="typeValue"
-                        onChange={(e) => setQuestionList.typeValue(e.target.value)}
-                    > 
-                        <option value = "0">Free Response</option>
-                        <option value = "1">Rating</option>
-                    </select>
-                </label>
-                </div>
               <div className="second-division">
                 {questionList.length !== 1 && (
                   <button
