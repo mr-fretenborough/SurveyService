@@ -132,8 +132,8 @@ app.post('/add_response', (req, res) => {
         if (err) {
             console.log(err);
         }
-        console.log(out);
-        res.send("inside");
+        console.log("response inserted");
+        res.send(out);
     });
 });
 /************************** Search Questions **************************/
