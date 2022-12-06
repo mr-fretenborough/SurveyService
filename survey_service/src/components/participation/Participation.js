@@ -116,7 +116,7 @@ function Participation(props) {
                     })}
                     </tbody>
                 </table>
-                <button onClick={postResponses()}>Submit</button>
+                <button onClick={() => {postResponses()}}>Submit</button>
             </>
         ))
     }

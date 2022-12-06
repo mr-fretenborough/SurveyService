@@ -123,17 +123,6 @@ app.post('/add_response', (req, res) => {
     const userID = req.body.userid;
     const rtoq = req.body.rtoq;
     const response = req.body.responses;
-    // const query = `
-    //     insert into Responses (UserID, QuestionID, Response) values (${userID}, ${questionID}, "${response}");
-    // `;
-    // // execute sql
-    // db.query(query, (err, out) => {
-    //     if (err) {              
-    //         console.log(err);
-    //     }
-    //     console.log("response inserted");
-    //     res.send(out);
-    // });
 
     for (let i = 0; i < response.length; i++) {
         console.log(rtoq);
@@ -145,7 +134,6 @@ app.post('/add_response', (req, res) => {
             console.log(`response ${i} inserted`);
         });
     }
-    res.send(out);
 });
 /************************** Search Questions **************************/
 app.post('/get_questions_by_surveyid', (req, res) => {
