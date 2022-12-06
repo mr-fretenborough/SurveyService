@@ -137,7 +137,7 @@ function Viewing(props) {
   const selectR = () => {
     let r = [];
     for (let i = 0; i < results.length; i++) 
-      if (results[i].QuestionID = questionid)
+      if (results[i].QuestionID === questionid)
         r.push(results[i]);
     return r;
   }
