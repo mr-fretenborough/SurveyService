@@ -72,7 +72,7 @@ app.post('/create_survey', (req, res) => {
     const endDate = req.body.endDate;
 
     // get question data
-    const questions = "req.body.questions";
+    const questions = req.body.questions;
     const questionType = req.body.questionType;
 
     const survey_query = `
