@@ -29,16 +29,19 @@ function Participation(props) {
     //displayQuestions;
     const getQuestions = (SurveyID) => {
         Axios.post(`${props.host}:3002/get_questions_by_surveyid`, {
-            surveyid: SurveyID
+                surveyid: SurveyID
             }).then((response) => {
-            setQuestions(response.data);
-            if (!responseList.length) for (let i = 0; i < questionList.length; i++) setResponseList(responseList.push(""));
-            if (!responsequestionList.length) for (let i = 0; i < questionList.length; i++) setResponseQuestionList(responsequestionList.push(""));
-            console.log(response.data);
+                setQuestions(response.data);
+                if (!responseList.length) 
+                    for (let i = 0; i < questionList.length; i++) {
+                        setResponseList(responseList.push(""));
+                        setResponseQuestionList(responsequestionsList.push(questionsList[i].QuestionID));
+                    }
+                console.log(response.data);
             });
     }
 
-    const displayQuestion = (c) => {
+    const displayQuestion = (c, i) => {
         if(c.QuestionType==0){
             return(
                 <tr key={c.QuestionID}>
@@ -46,7 +49,7 @@ function Participation(props) {
                 <td><select 
                         name="typeValue" 
                         id="typeValue"
-                        onChange={(e) => {let new_r = responsesList; new_r[i]=e.target.val;setResponseList(new_r);let new_rq = responsequestionsList; new_r[i]=c.QuestionID;setResponseQuestionList(new_rq)}}
+                        onChange={(e) => {let new_r = responsesList; new_r[i]=e.target.val;setResponseList(new_r);}}
                     > 
                         <option value = "1">1</option>
                         <option value = "2">2</option>
@@ -61,7 +64,7 @@ function Participation(props) {
            return(
                 <tr key={c.QuestionID}>
                 <td>{c.Question}</td>
-                <td><input type="text" placeholder="Text Response..." onChange={(e) => {let new_r = responsesList; new_r[i]=e.target.val;setResponseList(new_r);let new_rq = responsequestionsList; new_r[i]=c.QuestionID;setResponseQuestionList(new_rq)}}></input>
+                <td><input type="text" placeholder="Text Response..." onChange={(e) => {let new_r = responsesList; new_r[i]=e.target.val;setResponseList(new_r);}}></input>
                 </td>
                 </tr>
             ) 
@@ -81,6 +84,23 @@ function Participation(props) {
         }
         
     }
+
+    const postResponsesKier = () => {
+        Axios.post(`${props.host}:3002/add_response`, {
+            userid: props.userid,
+            rtoq: responsequestionsList,
+            responses: responsesList
+        }).then((response) => {
+            console.log(response);
+        })
+    }
+
+    // get questions
+    // initialize resonse list R
+    // R -> Q list init
+    // create elements
+    // tezt box elem onchange(changeR())
+
 
     return (
         <div>
@@ -106,7 +126,7 @@ function Participation(props) {
                         <td>{c.Description}</td>
                         <td>{c.StartDate}</td>
                         <td>{c.EndDate}</td>
-                        <td><button onClick={() => {setSurveyID(c.SurveyID);getQuestions(c.SurveyID);setResponseList([])}}>Select</button></td>
+                        <td><button onClick={() => {setSurveyID(c.SurveyID);setResponseList([]);setResponseQuestionList([]);getQuestions(c.SurveyID);}}>Select</button></td>
                         </tr>
                     )}
                 </tbody>
@@ -125,13 +145,13 @@ function Participation(props) {
                 </thead>
                 <tbody>
                     {
-                    questionsList.map(c =>
-                        displayQuestion(c)
+                    questionsList.map((c, i) =>
+                        displayQuestion(c, i)
                     )}
                 </tbody>
             </table>
 
-            <button onClick={() => {postResponses();}}>Sumbit</button>   
+            <button onClick={() => {postResponsesKier();}}>Sumbit</button>   
                         
         </div>
     )

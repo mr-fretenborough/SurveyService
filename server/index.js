@@ -121,19 +121,30 @@ app.post('/get_surveys', (req, res) => {
 app.post('/add_response', (req, res) => {
     // format new response data & build query
     const userID = req.body.userid;
-    const questionID = req.body.questionid;
-    const response = req.body.response;
-    const query = `
-        insert into Responses (UserID, QuestionID, Response) values (${userID}, ${questionID}, "${response}");
-    `;
-    // execute sql
-    db.query(query, (err, out) => {
-        if (err) {
-            console.log(err);
-        }
-        console.log("response inserted");
-        res.send(out);
-    });
+    const rtoq = req.body.rtoq;
+    const response = req.body.responses;
+    // const query = `
+    //     insert into Responses (UserID, QuestionID, Response) values (${userID}, ${questionID}, "${response}");
+    // `;
+    // // execute sql
+    // db.query(query, (err, out) => {
+    //     if (err) {
+    //         console.log(err);
+    //     }
+    //     console.log("response inserted");
+    //     res.send(out);
+    // });
+
+    for (let i = 0; i < responses.length; i++) {
+        let query = `insert into Responses (UserID, QuestionID, Response) values (${userID}, ${rtoq[i]}, "${response[i]}");`;
+        db.query(query, (err, out) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log(`response ${i} inserted`);
+            res.send(out);
+        });
+    }
 });
 /************************** Search Questions **************************/
 app.post('/get_questions_by_surveyid', (req, res) => {
