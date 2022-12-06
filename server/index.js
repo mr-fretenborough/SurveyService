@@ -95,9 +95,9 @@ app.post('/create_survey', (req, res) => {
                     console.log(err);
                 }
                 console.log(`inserting the ${i} question`);
-                res.send(result);
             })
         }
+        res.send(result);
     });
 });
 /************************** Get Surveys **************************/
