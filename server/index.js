@@ -146,6 +146,7 @@ app.post('/add_response', (req, res) => {
             if (err) console.log(err); else console.log(out);
         });
     })
+    console.log("done");
 });
 /************************** Search Questions **************************/
 app.post('/get_questions_by_surveyid', (req, res) => {
