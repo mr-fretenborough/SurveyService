@@ -149,3 +149,6 @@ function Participation(props) {
 }
 
 export default Participation;
+
+
+//if (!responseList.length) for (let i = 0; i < questionList.length; i++) setResponseList(responseList.push(""));
