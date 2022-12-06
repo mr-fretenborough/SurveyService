@@ -66,12 +66,13 @@ function Participation(props) {
     }
 
     //displayQuestions;
-    const postResponses = (r) => {
+    const postResponses = () => {
+        console.log(responsesList.data);
         return(
             <div>
             {
             responsesList.map(r =>
-            <div>{postResponses(r)}</div>
+            <div>{postResponse(r)}</div>
                 
             )}
             </div>
