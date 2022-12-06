@@ -102,7 +102,7 @@ function Participation(props) {
         if (!responsesList.length) 
         for (let i = 0; i < questionsList.length; i++) {
             console.log(`q ${questionsList[0].QuestionID} r ${responsesList}`);
-            setResponseList(responsesList.push(""));
+            setResponseList(responsesList + "");
             setResponseQuestionsList(responsequestionsList.push(questionsList[i].QuestionID));
         }
     }
