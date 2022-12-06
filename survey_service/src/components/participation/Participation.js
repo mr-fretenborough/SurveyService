@@ -5,11 +5,11 @@ import './Participation.css';
 
 function Participation(props) {
     
-    const [surveyid, setSurveyID] = useState("");
+    const [surveyid, setSurveyID] = useState(0);
     const [surveyList, setSurveys] = useState([]);
     const [nosurveys,   setNoSurveys]   = useState(0);
     const [questionsList, setQuestions] = useState([]);
-    const [responsesList, setResponses] = useState([{questionid: 0,response:""}]);
+    const [responsesList, setResponseList] = useState([""]);
 
     //firstLoadSurveys;
     const loadSurveys = () => {
@@ -31,6 +31,9 @@ function Participation(props) {
             surveyid: SurveyID
             }).then((response) => {
             setQuestions(response.data);
+            for(let i=0;i<questionsList.length;i++){
+                
+            }
             console.log(response.data);
             });
     }
@@ -38,12 +41,12 @@ function Participation(props) {
     const displayQuestion = (c) => {
         if(c.QuestionType==0){
             return(
-                <div key={c.QuestionID}>
-                <text>{c.Question}</text>
-                <select 
+                <tr key={c.QuestionID}>
+                <td>{c.Question}</td>
+                <td><select 
                         name="typeValue" 
                         id="typeValue"
-                        onChange={(e) => "setResponseList.response(e.target.value); setResponseList.questionid(c.QuestionID)"}
+                        //onChange={(e) => {let new_r = R; new_r[i]=e.target.val;set}}
                     > 
                         <option value = "1">1</option>
                         <option value = "2">2</option>
@@ -51,16 +54,16 @@ function Participation(props) {
                         <option value = "4">4</option>
                         <option value = "5">5</option>
                     </select>
-                <br></br>
-                </div>
+                </td>
+                </tr>
                 )
         }else{
            return(
-                <div key={c.QuestionID}>
-                <text>{c.Question}</text>
-                <input type="text" placeholder="Text Response..." onChange={(e) => "setResponseList.response(e.target.value); setResponseList.questionid(c.QuestionID)"}></input>
-                <br></br>
-                </div>
+                <tr key={c.QuestionID}>
+                <td>{c.Question}</td>
+                <td><input type="text" placeholder="Text Response..." onChange={(e) => "setResponseList.response(e.target.value); setResponseList.questionid(c.QuestionID)"}></input>
+                </td>
+                </tr>
             ) 
         }
     }
@@ -122,12 +125,23 @@ function Participation(props) {
                 
             <>{`surveyid ${surveyid}\nuserid ${props.userid}`}</>
             
-            <div id="questions">
-                {
-                questionsList.map(c =>
-                    displayQuestion(c)
-                )}
-            </div>
+            <br></br>
+            
+            <table  className="table table-bordered text-white" >
+                <thead>
+                    <tr>
+                        <th>Question</th>
+                        <th>Response</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                    questionsList.map(c =>
+                        displayQuestion(c)
+                    )}
+                </tbody>
+            </table>
+
             <button onClick={() => {postResponses();}}>Sumbit</button>   
                         
         </div>
