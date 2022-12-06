@@ -125,7 +125,7 @@ app.post('/add_response', (req, res) => {
     const questionID = req.body.questionid;
     const response = req.body.response;
     const query = `
-        insert into Responses (UserID, QuestionID, Response) values (${userID}, ${questionID}, ${response});
+        insert into Responses (UserID, QuestionID, Response) values (${userID}, ${questionID}, "${response}");
     `;
     // execute sql
     db.query(query, (err, out) => {

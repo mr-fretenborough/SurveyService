@@ -64,7 +64,7 @@ function Viewing(props) {
             return (
               <tr>
                 <td>
-                  <button onClick={() => {setSurveyID(s.SurveyID)}}>Select</button>
+                  <button onClick={() => {setSurveyID(s.SurveyID); getQuestions()}}>Select</button>
                 </td>
                 <td>{s.Title}</td>
                 <td>{s.Description}</td>
@@ -78,7 +78,6 @@ function Viewing(props) {
     ));
   }
   const showQuestions = () => {
-    if (!noquestions && !questions.length) getQuestions();
     return (noquestions ? <h2>Survey has no questions to display.</h2> : (
       <table>
         <thead>
@@ -93,7 +92,7 @@ function Viewing(props) {
             return (
               <tr>
                 <td>
-                  <button onClick={() => {setQuestionID(q.QuestionID); setQType(q.QuestionType)}}>Select</button>
+                  <button onClick={() => {setQuestionID(q.QuestionID); setQType(q.QuestionType); getResults()}}>Select</button>
                 </td>
                 <td>{q.QuestionType}</td>
                 <td>{q.Question}</td>
@@ -105,7 +104,6 @@ function Viewing(props) {
     ))
   }
   const showResults = () => {
-    if (!noresults && !results.length) getResults();
     return (noresults ? <h1>Question has no responses to display.</h1> : (
       (qtype ? numResponse(selectR()) : worResponse(selectR()))
     ));
@@ -139,7 +137,9 @@ function Viewing(props) {
   return (
       <div className='viewing'>
         <>{`surveyid:${surveyid}   questionid:${questionid}`}</>
+        <hr className='line'/>
         {showSurveys()}
+        <hr className='line'/>
         {surveyid !== 0 && showQuestions()}
         {questionid !== 0 && showResults()}
       </div>
