@@ -124,17 +124,28 @@ app.post('/add_response', (req, res) => {
     const rtoq = req.body.rtoq;
     const response = req.body.responses;
 
+    // for (let i = 0; i < response.length; i++) {
+    //     console.log(rtoq);
+    //     let query = `insert into Responses (UserID, QuestionID, Response) values (${userID}, ${rtoq[i]}, "${response[i]}");`;
+    //     db.query(query, (err, out) => {
+    //         if (err) {
+    //             console.log(err);
+    //         }
+    //         console.log(`response ${i} inserted`);
+    //         console.log(out);
+    //     });
+    // }
+
+    let queries = [];
     for (let i = 0; i < response.length; i++) {
-        console.log(rtoq);
-        let query = `insert into Responses (UserID, QuestionID, Response) values (${userID}, ${rtoq[i]}, "${response[i]}");`;
-        db.query(query, (err, out) => {
-            if (err) {
-                console.log(err);
-            }
-            console.log(`response ${i} inserted`);
-            console.log(out);
-        });
+        queries.push(`insert into Responses (UserID, QuestionID, Response) values (${userID}, ${rtoq[i]}, "${response[i]}");`);
     }
+    console.log(queries);
+    queries.forEach(q => {
+        db.query(q, (err, out) => {
+            if (err) console.log(err); else console.log(out);
+        });
+    })
 });
 /************************** Search Questions **************************/
 app.post('/get_questions_by_surveyid', (req, res) => {
