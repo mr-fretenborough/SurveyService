@@ -136,6 +136,7 @@ app.post('/add_response', (req, res) => {
     // });
 
     for (let i = 0; i < response.length; i++) {
+        console.log(rtoq);
         let query = `insert into Responses (UserID, QuestionID, Response) values (${userID}, ${rtoq[i]}, "${response[i]}");`;
         db.query(query, (err, out) => {
             if (err) {
